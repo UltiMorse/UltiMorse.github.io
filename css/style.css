@@ -1,11 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Kosugi+Maru&display=swap');
 
 body {
-    font-family: "Yu Gothic", "Meiryo", "ヒラギノ角ゴ ProN W3", "Hiragino Kaku Gothic ProN", Arial, sans-serif;
-    font-size: 18px;
-    line-height: 1.8;
-    color: #222;
-    background: #fff;
+    background: #181a1b;
+    color: #f1f1f1;
+    font-family: 'Kosugi Maru', 'Meiryo', sans-serif;
     margin: 0;
     padding: 0;
 }
@@ -43,9 +41,11 @@ nav a:hover {
 }
 
 main {
-    max-width: 800px;
-    margin: 2em auto;
-    padding: 0 1em;
+    max-width: 700px;
+    margin: 40px auto;
+    padding: 0 16px;
+    line-height: 2;
+    letter-spacing: 0.05em;
 }
 
 section#blog h2 {
