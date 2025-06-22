@@ -1,0 +1,10 @@
+title: UltiMorseのブログ
+description: テクノロジー、ガジェット、プログラミングなどの体験記・技術記事
+url: "https://ultimorse.github.io"
+baseurl: "" # サブディレクトリ運用なら"/サブディレクトリ名"
+author: UltiMorse
+
+markdown: kramdown
+theme: minima
+plugins:
+  - jekyll-sitemap
