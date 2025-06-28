@@ -147,7 +147,9 @@ article img {
 }
 
 footer {
-    background: #23272a;
+    background: #23272a url('../images/footer_design.png') repeat-x bottom;
+    background-blend-mode: overlay;
+    opacity: 0.8;
     color: #aaa;
     text-align: center;
     padding: 16px 0;
