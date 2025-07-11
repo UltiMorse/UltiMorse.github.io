@@ -20,19 +20,17 @@ const articles = [
     },
 ];
 
-const articlesPerPage = 3; // 1ページあたりの記事数(記事増えたら変える予定)
+const articlesPerPage = 2; // 1ページあたりの記事数(記事増えたら変える予定)
 let currentPage = 1;
 
-function renderArticles() { // 記事をレンダリング
-    const blogSection = document.getElementById('blog'); // id 'blog'の要素を取得
-    const totalPages = Math.ceil(articles.length / articlesPerPage); // 総ページ数
+function renderArticles() {
+    const blogSection = document.getElementById('blog');
+    const totalPages = Math.ceil(articles.length / articlesPerPage);
 
-    // 表示する記事を決定
-    const start = (currentPage - 1) * articlesPerPage; // 現在のページに基づいて開始インデックスを計算
-    const end = start + articlesPerPage; // 終了インデックスを計算
-    const visibleArticles = articles.slice(start, end); // 表示する記事の配列を取得
+    const start = (currentPage - 1) * articlesPerPage;
+    const end = start + articlesPerPage;
+    const visibleArticles = articles.slice(start, end);
 
-    // 記事HTML生成
     let articlesHTML = '<h2>ブログ記事一覧</h2>';
     visibleArticles.forEach(article => {
     articlesHTML += `

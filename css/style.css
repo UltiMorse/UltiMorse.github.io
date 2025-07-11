@@ -1,156 +1,254 @@
-@import url('https://fonts.googleapis.com/css2?family=Kosugi+Maru&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&family=Kosugi+Maru&display=swap');
+
+html {
+  box-sizing: border-box;
+  font-size: 16px;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
 
 body {
-    background: #181a1b;
-    color: #f1f1f1;
-    font-family: 'Noto Sans JP', 'Yu Gothic', 'Meiryo', sans-serif;
-    margin: 0;
-    padding: 0;
+  background: #181a1b;
+  color: #f1f1f1;
+  font-family: 'Noto Sans JP', 'Yu Gothic', 'Meiryo', sans-serif;
+  margin: 0;
+  padding: 0;
+  line-height: 1.9;
+  letter-spacing: 0.04em;
 }
 
 header {
-    background: #23272a;
-    padding: 20px 0;
-    text-align: center;
+  background: #22252a;
+  padding: 32px 0 18px 0;
+  text-align: center;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.18);
 }
 
 header h1 {
-    margin: 0;
-    font-size: 2.2em;
-    color: #fff;
+  margin: 0;
+  font-size: 2.4em;
+  color: #fff;
+  font-family: 'Kosugi Maru', 'Noto Sans JP', sans-serif;
+  letter-spacing: 0.08em;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.18);
 }
 
 nav ul {
-    list-style: none;
-    padding: 0;
-    margin: 15px 0 0 0;
-    display: flex;
-    justify-content: center;
-    gap: 30px;
+  list-style: none;
+  padding: 0;
+  margin: 18px 0 0 0;
+  display: flex;
+  justify-content: center;
+  gap: 32px;
 }
 
 nav a {
-    color: #ffb347;
-    text-decoration: none;
-    font-weight: bold;
-    transition: color 0.2s;
+  color: #ffb347;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 1.08em;
+  transition: color 0.2s, text-shadow 0.2s;
+  padding: 2px 6px;
+  border-radius: 6px;
 }
-
+nav a:focus {
+  outline: 2px solid #ffb347;
+  outline-offset: 2px;
+}
 nav a:hover {
-    color: #fff176;
+  color: #ffe0a3;
+  background: #23272a;
+  text-shadow: none;
 }
 
 main {
-    max-width: 700px;
-    margin: 40px auto;
-    padding: 0 16px;
-    line-height: 2;
-    letter-spacing: 0.05em;
+  max-width: 760px;
+  margin: 48px auto 0 auto;
+  padding: 0 18px 32px 18px;
+  background: rgba(30,32,34,0.98);
+  border-radius: 18px;
+  box-shadow: 0 4px 32px rgba(0,0,0,0.18);
 }
 
 section#blog h2 {
-    border-bottom: 2px solid #333;
-    padding-bottom: 8px;
-    margin-bottom: 24px;
+  border-bottom: 2.5px solid #ffb347;
+  padding-bottom: 10px;
+  margin-bottom: 28px;
+  font-family: 'Kosugi Maru', 'Noto Sans JP', sans-serif;
+  font-size: 1.5em;
+  color: #ffb347;
+  letter-spacing: 0.1em;
 }
 
 article {
-    background: #23272a;
-    border-radius: 8px;
-    padding: 24px 20px 20px 20px;
-    margin-bottom: 28px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-    line-height: 1.8;
+  background: #23272a;
+  border-radius: 14px;
+  padding: 28px 24px 22px 24px;
+  margin-bottom: 32px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.22);
+  line-height: 1.85;
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+article:hover {
+  box-shadow: 0 6px 24px #ffb34733, 0 2px 12px rgba(0,0,0,0.22);
+  transform: translateY(-2px) scale(1.012);
 }
 
 article h3 {
-    color:#ffb347;
-    margin: 0 0 0.2em 0;
-    font-size: 1.3em;
-    display: inline-block;
-    vertical-align: middle;
+  color: #4fc3f7;
+  margin: 0 0 0.2em 0;
+  font-size: 1.25em;
+  font-family: 'Kosugi Maru', 'Noto Sans JP', sans-serif;
+  display: inline-block;
+  vertical-align: middle;
+  letter-spacing: 0.07em;
 }
 
 .article-date {
-    margin-left: 1em;
-    color: #bbb;
-    font-size: 0.95em;
-    vertical-align: middle;
+  margin-left: 1em;
+  color: #bbb;
+  font-size: 0.98em;
+  vertical-align: middle;
 }
 
 article h3 + .article-date {
-    /* タイトル直後の日付の上下間隔を詰める */
-    margin-top: 0;
+  margin-top: 0;
 }
 
 article p {
-    margin: 0.7em 0 1.2em 0;
-    font-size: 1.08em;
+  margin: 0.7em 0 1.2em 0;
+  font-size: 1.08em;
 }
 
 article a {
-    color: #ffb347;
-    text-decoration: underline;
-    transition: color 0.2s;
-    margin-right: 1em;
+  color: #ffb347;
+  text-decoration: underline;
+  transition: color 0.2s, background 0.2s;
+  margin-right: 1em;
+  border-radius: 5px;
+  padding: 2px 8px;
 }
-
+article a:hover {
+  color: #ffe0a3;
+  background: #2a2d32;
+  text-decoration: underline;
+}
 article a:last-child {
-    margin-right: 0;
+  margin-right: 0;
 }
 
-/* 記事内画像のスタイル */
 article img {
-    display: block;
-    max-width: 90%;
-    height: auto;
-    margin: 1.5em auto;
-    border-radius: 10px;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.18);
+  display: block;
+  max-width: 92%;
+  height: auto;
+  margin: 1.5em auto;
+  border-radius: 12px;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.18);
 }
 
-/* パンくずリストのスタイル */
 .breadcrumb {
-    margin: 16px 0 24px 0;
-    font-size: 0.95em;
+  margin: 20px 0 30px 0;
+  font-size: 1em;
 }
-
 .breadcrumb ol {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    flex-wrap: wrap;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
 }
-
 .breadcrumb li {
-    display: flex;
-    align-items: center;
-    color: #ffb347;
+  display: flex;
+  align-items: center;
+  color: #ffb347;
+  font-family: 'Kosugi Maru', 'Noto Sans JP', sans-serif;
 }
-
 .breadcrumb li + li::before {
-    content: "›";
-    color: #888;
-    margin: 0 8px;
-    font-size: 1em;
+  content: "›";
+  color: #888;
+  margin: 0 8px;
+  font-size: 1em;
 }
-
 .breadcrumb a {
-    color: #ffb347;
-    text-decoration: none;
-    transition: text-decoration 0.2s;
+  color: #ffb347;
+  text-decoration: none;
+  transition: text-decoration 0.2s, color 0.2s;
+}
+.breadcrumb a:hover {
+  text-decoration: underline;
+  color: #ffe0a3;
 }
 
-.breadcrumb a:hover {
-    text-decoration: underline;
+.pager {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin: 32px 0 0 0;
+}
+.pager button {
+  font-family: 'Kosugi Maru', 'Noto Sans JP', sans-serif;
+  font-size: 1.08em;
+  background: #23272a;
+  color: #ffb347;
+  border: 2px solid #ffb347;
+  border-radius: 8px;
+  padding: 6px 18px;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+  box-shadow: 0 1px 4px #0002;
+}
+.pager button.active, .pager button:focus {
+  background: #ffb347;
+  color: #23272a;
+  outline: none;
+  box-shadow: 0 2px 8px #ffb34744;
+}
+.pager button:hover:not(:disabled):not(.active) {
+  background: #ffe0a3;
+  color: #23272a;
+}
+.pager button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 
 footer {
-    background: #23272a;
-    color: #aaa;
-    text-align: center;
-    padding: 16px 0;
-    margin-top: 40px;
+  background: #22252a;
+  color: #aaa;
+  text-align: center;
+  padding: 20px 0 16px 0;
+  margin-top: 48px;
+  font-size: 1em;
+  border-radius: 0 0 18px 18px;
+  box-shadow: 0 -2px 12px rgba(0,0,0,0.12);
+}
+
+@media (max-width: 600px) {
+  main {
+    max-width: 98vw;
+    margin: 18px 1vw 0 1vw;
+    padding: 0 2vw 18px 2vw;
+    border-radius: 10px;
+  }
+  header h1 {
+    font-size: 1.3em;
+  }
+  section#blog h2 {
+    font-size: 1.1em;
+  }
+  article {
+    padding: 16px 8px 12px 8px;
+    border-radius: 7px;
+  }
+  .pager button {
+    font-size: 0.98em;
+    padding: 4px 10px;
+    border-radius: 6px;
+  }
+  footer {
     font-size: 0.95em;
+    border-radius: 0 0 10px 10px;
+  }
 }
