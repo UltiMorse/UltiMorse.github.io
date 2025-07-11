@@ -235,6 +235,31 @@ footer {
   header h1 {
     font-size: 1.3em;
   }
+  nav ul {
+    flex-direction: row;
+    gap: 18px;
+    align-items: center;
+    margin-top: 10px;
+    overflow-x: auto;
+    white-space: nowrap;
+    padding-bottom: 4px;
+    scrollbar-width: none;
+  }
+  nav ul::-webkit-scrollbar {
+    display: none;
+  }
+  nav li {
+    width: auto;
+    text-align: center;
+    flex: 0 0 auto;
+  }
+  nav a {
+    display: inline-block;
+    min-width: 72px;
+    padding: 8px 10px;
+    font-size: 1.08em;
+    border-radius: 8px;
+  }
   section#blog h2 {
     font-size: 1.1em;
   }
