@@ -1,0 +1,132 @@
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Let's note CF-FV4のSSD交換</title>
+    <meta name="description" content="Let's note CF-FV4のSSDを256GBから1TBに換装した手順や注意点、交換後のベンチマーク・感想をまとめた体験記です。">
+    <meta name="keywords" content="Let's note, CF-FV4, SSD換装, SSD交換, ノートパソコン, 分解, ベンチマーク, パソコン改造, UltiMorse, 体験記">
+    <link rel="stylesheet" href="../css/style.css">
+    <!-- OGPタグ -->
+    <meta property="og:title" content="Let's note CF-FV4のSSD交換">
+    <meta property="og:description" content="Let's note CF-FV4のSSDを256GBから1TBに換装した手順や注意点、交換後のベンチマーク・感想をまとめた体験記です。">
+    <meta property="og:image" content="https://ultimorse.github.io/img/ogp.png">
+    <meta property="og:url" content="https://ultimorse.github.io/articles/2025-04-11-cf-fv4-ssd.html">
+    <meta property="og:type" content="article">
+    <!-- Twitterカード用タグ -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Let's note CF-FV4のSSD交換">
+    <meta name="twitter:description" content="Let's note CF-FV4のSSDを256GBから1TBに換装した手順や注意点、交換後のベンチマーク・感想をまとめた体験記です。">
+    <meta name="twitter:image" content="https://ultimorse.github.io/img/ogp.png">
+</head>
+<body>
+    <header>
+        <h1><a href="../index.html" style="text-decoration:none; color:inherit;">UltiMorseのブログ</a></h1>
+        <nav>
+            <ul>
+                <li><a href="https://github.com/UltiMorse" target="_blank" rel="noopener">GitHub</a></li>
+                <li><a href="https://atcoder.jp/users/UltiMorse" target="_blank" rel="noopener">AtCoder</a></li>
+                <li><a href="https://x.com/UltiMorse" target="_blank" rel="noopener">X（旧Twitter）</a></li>
+                <li><a href="https://www.youtube.com/@UltiMorse" target="_blank" rel="noopener">YouTube</a></li>
+            </ul>
+        </nav>
+    </header>
+    <nav aria-label="パンくずリスト" class="breadcrumb">
+        <ol>
+            <li><a href="../index.html">ホーム</a></li>
+            <li>Let's note CF-FV4のSSD交換</li>
+        </ol>
+    </nav>
+    <main>
+        <article>
+            <header>
+                <h2>Let's note CF-FV4のSSD交換</h2>
+                <span class="article-date"><small>2025年4月11日</small></span>
+            </header>
+            <section>
+                <h3>はじめに</h3>
+                <p>
+                    生協モデルCF-FV4のSSDが256GBしかなかったので、思い切って1TBに換装しました。<br>
+                    この記事では、分解方法や交換手順、注意点、交換後の感想などをまとめます。
+                </p>
+
+                <h3>分解とSSDの取り外し</h3>
+                <p>
+                    分解方法は
+                    <a href="https://shop.applied-net.co.jp/blog/cate_news/22935/" target="_blank" rel="noopener">こちら</a>
+                    のサイトを参考にしました。<br>
+                    Windowsの再インストール方法などは記載されていなかったので、この記事で補足します。
+                </p>
+                <figure>
+                    <img src="../images/images-2025-04-11/pcbunnkai.jpg" alt="CF-FV4内部の画像">
+                    <figcaption>CF-FV4の内部。中央やや右にSSDが見えます。</figcaption>
+                </figure>
+                <p>
+                    分解作業はとても簡単で、特に危険なポイントはありませんでした。<br>
+                    ネジを外してカバーを開けると、すぐにSSDにアクセスできます。
+                </p>
+                <p>
+                    今回使用したSSDは「Crucial T500 1TB」です。<br>
+                    もともと入っていたSSDはSAMSUNG製のPCIe4.0対応M.2 SSDでしたが、OEM品で型番のシールが見えず詳細は不明でした。<br>
+                    書き込み速度はやや遅めのものでした。
+                </p>
+                <figure>
+                    <img src="../images/images-2025-04-11/ssd.jpg" alt="使用したSSDの画像">
+                    <figcaption>今回換装したCrucial T500 1TB。</figcaption>
+                </figure>
+
+                <h3>Windowsの再インストールと注意点</h3>
+                <p>
+                    SSD交換後は、Windowsの再インストールが必要です。<br>
+                    CF-FV4にはSSDとは別に回復領域が用意されていないため、交換前に必ず回復ドライブを作成しておきましょう。
+                </p>
+                <p>
+                    回復ドライブの作成は、Windowsの設定から「更新とセキュリティ」→「回復」→「回復ドライブの作成」で行えます。<br>
+                    USBメモリは32GB以上が推奨ですが、実際の容量が足りない場合もあるので64GB以上をおすすめします。パーティションで区切られ、半分くらいは使われないのはもったいないかもしれませんが。
+                </p>
+                <p>
+                    私はKIOXIAの64GB USBメモリを使用しました。ヤマダ電機でセールだったので選びましたが、暗号化機能付きは避けた方が無難です。
+                </p>
+                <p>
+                    回復ドライブを作成したら、SSD交換後のCF-FV4に接続して電源を入れ、BIOS設定でUSBから起動するようにします。<br>
+                    その後、回復ドライブからWindowsのインストールを行います。<br>
+                    インストールは指示に従うだけで完了します。
+                </p>
+                
+                <h3>交換後のベンチマーク</h3>
+                <p>
+                    交換後のSSDの速度は以下の通りです。
+                </p>
+                <pre><code>Read: 5,159 MB/s
+Write: 4,074 MB/s</code></pre>
+                <figure>
+                    <img src="../images/images-2025-04-11/ssd-speed.png" alt="SSD速度測定結果の画像">
+                    <figcaption>Crucial T500 1TBのベンチマーク結果。</figcaption>
+                </figure>
+                <p>
+                    交換前のSSDと比べて、読み書き速度が大きく向上しました。<br>
+                    大きなデータを扱うときは、体感でも速さを感じます。
+                </p>
+
+                <h3>まとめ・感想</h3>
+                <p>
+                    SSDの容量が増えたことで、CF-FV4がより快適に使えるようになりました。<br>
+                    大学だけで使うなら標準容量でも十分ですが、いろいろなソフトを入れたい自分には1TB換装は大満足です。
+                </p>
+                <p>
+                    もしCF-FV4を使っていてSSD容量に不満がある方は、ぜひ交換を検討してみてください。<br>
+                    自己責任にはなりますが、パソコン好きな方ならきっと自分でできると思います！
+                </p>
+                <p>関連記事：<a href="../articles/2025-04-20-ps4-ssd.html">PS4 ProのHDDをSSDに換装</a></p>
+            </section>
+            <nav style="margin-top:2em;">
+                <a href="../index.html" class="home-btn">← ブログ一覧へ戻る</a>
+            </nav>
+        </article>
+    </main>
+    <footer>
+        <p>&copy; 2025 UltiMorse</p>
+    </footer>
+</body>
+</html>
