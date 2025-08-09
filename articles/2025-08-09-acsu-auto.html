@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>信州大学ACSU多要素認証の自動化</title>
+    <meta name="description"
+        content="信州大学ACSU向けWisePoint多要素認証（イメージ認証）を自動化するTampermonkeyユーザースクリプトの解説。画像マトリクスの仕様、スクリプトの使い方、注意点をまとめています。">
+    <meta name="keywords" content="WisePoint, 多要素認証, 画像認証, Tampermonkey, ユーザースクリプト, ACSU, 信州大学, 自動化, セキュリティ, UltiMorse">
+    <link rel="stylesheet" href="../css/style.css">
+    <!-- OGPタグ -->
+    <meta property="og:title" content="信州大学ACSU多要素認証の自動化">
+    <meta property="og:description"
+        content="信州大学ACSU向けWisePoint多要素認証（イメージ認証）を自動化するTampermonkeyユーザースクリプトの解説。画像マトリクスの仕様、スクリプトの使い方、注意点をまとめています。">
+    <meta property="og:image" content="https://ultimorse.github.io/img/ogp.png">
+    <meta property="og:url" content="https://ultimorse.github.io/articles/2025-08-09-acsu-auto.html">
+    <meta property="og:type" content="article">
+    <!-- Twitterカード用タグ -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="信州大学ACSU多要素認証の自動化">
+    <meta name="twitter:description"
+        content="信州大学ACSU向けWisePoint多要素認証（イメージ認証）を自動化するTampermonkeyユーザースクリプトの解説。画像マトリクスの仕様、スクリプトの使い方、注意点をまとめています。">
+    <meta name="twitter:image" content="https://ultimorse.github.io/img/ogp.png">
+</head>
+
+<body>
+    <header>
+        <h1><a href="../index.html" style="text-decoration:none; color:inherit;">UltiMorseのブログ</a></h1>
+        <nav>
+            <ul>
+                <li><a href="https://github.com/UltiMorse" target="_blank" rel="noopener">GitHub</a></li>
+                <li><a href="https://atcoder.jp/users/UltiMorse" target="_blank" rel="noopener">AtCoder</a></li>
+                <li><a href="https://x.com/UltiMorse" target="_blank" rel="noopener">X（旧Twitter）</a></li>
+                <li><a href="https://www.youtube.com/@UltiMorse" target="_blank" rel="noopener">YouTube</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <nav aria-label="パンくずリスト" class="breadcrumb">
+        <ol>
+            <li><a href="../index.html">ホーム</a></li>
+            <li>信州大学ACSU多要素認証の自動化</li>
+        </ol>
+    </nav>
+    <main>
+        <article>
+            <header>
+                <h2>信州大学ACSU多要素認証の自動化</h2>
+                <span class="article-date"><small>2025年8月09日</small></span>
+            </header>
+
+            <section>
+                <h3>概要</h3>
+                <p>
+                    多要素認証がめんどくさかったので、信州大学ACSUの多要素認証「WisePoint」のイメージ認証を自動化するTampermonkeyユーザースクリプト「wisepoint-auto」を作成しました。<br>
+                    GitHubリポジトリ：<a href="https://github.com/UltiMorse/wisepoint-auto" target="_blank"
+                        rel="noopener">UltiMorse/wisepoint-auto</a>
+                </p>
+                <blockquote>
+                    <b>注意:</b><br>
+                    本スクリプトは検証目的であり、実運用や利用は推奨しません。<br>
+                    セキュリティ上のリスクや規約違反となる可能性があるため、自己責任でご利用ください。
+                </blockquote>
+                <figure>
+                    <img src="../images/images-2025-08-09/wisepoint.png" alt="wisepointの画面">
+                    <figcaption>自動入力ボタンで一発ログイン</figcaption>
+                </figure>
+            </section>
+            <section>
+                <h3>WisePointイメージ認証の仕様</h3>
+                <ul>
+                    <li>5×5のマス（合計25マス）が画面上に表示される</li>
+                    <li>各マスは <code>&lt;div class="input_imgdiv_class" id="buttonN" ...&gt;</code>（N=0〜24）で表現</li>
+                    <li>画像は <code>style="background-image:url('/idp/tenant/0/images/imatrix/iXX.gif')"</code> で指定</li>
+                    <li>画像ファイル名とアルファベットの対応（Qは存在しない）<br>
+                        例：i1.gif=A, i2.gif=B, ... i16.gif=P, i17.gif=R, ... i25.gif=Z<br>
+                        ※Qは存在しない。
+                    </li>
+                    <li>配置は毎回ランダム。ファイル名からアルファベットを判定</li>
+                </ul>
+            </section>
+            <section>
+                <h3>自動化の流れ</h3>
+                <ol>
+                    <li>5×5マスの各divから background-image のファイル名を取得</li>
+                    <li>ファイル名からアルファベットを判定（Qはスキップ）</li>
+                    <li>ユーザーが設定した順番（例：A→B→C→D）で該当するマスをクリック</li>
+                    <li>4つ選択後、「ログイン」ボタン（input#btnLogin）をクリック</li>
+                </ol>
+            </section>
+            <section>
+                <h3>使い方</h3>
+                <ol>
+                    <li>Chrome拡張「<a
+                            href="https://chromewebstore.google.com/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo?pli=1"
+                            target="_blank" rel="noopener">Tampermonkey</a>」をインストール</li>
+                    <li>Chrome拡張の開発者モードをオンにし、ユーザースクリプトの実効を許可</li>
+                    <li><a href="https://github.com/UltiMorse/wisepoint-auto" target="_blank"
+                            rel="noopener">GitHubリポジトリ</a>からスクリプトを取得</li>
+                    <li>Tampermonkeyで新規スクリプトとして追加</li>
+                    <li>スクリプト内の <code>const PASSWORD = ["A","B","C","D"];</code> を自分の設定に編集</li>
+                    <li>WisePointイメージ認証画面で自動クリックが動作することを確認</li>
+                    <li>以上がわからなければ使用はおすすめしません。</li>
+                </ol>
+            </section>
+            <section>
+                <h3>スクリプト本体（初期ver.）</h3>
+                <pre style="background:#222;color:#ffffff;padding:1em;overflow:auto;font-size:90%"><code>// ==UserScript==
+// @name         New Userscript
+// @namespace    http://tampermonkey.net/
+// @version      2025-08-08
+// @description  try to take over the world!
+// @author       You
+// @match        *://*/*
+// @icon         https://www.google.com/s2/favicons?sz=64&domain=shinshu-u.ac.jp
+// @grant        none
+// ==/UserScript==
+
+
+(function() {
+    'use strict';
+
+    // 設定：自動クリックするパスワード（順番にクリックされるアルファベット）
+    const PASSWORD = ['', '', '', '']; // ['A', 'B', 'C', 'D']; のようにパスワードを設定
+
+    // --- UI ---
+    // 自動入力ボタンをログインボタンの左隣に追加
+    function addAutoButton() {
+        if (document.getElementById('autoInputBtn')) return;
+        const btn = document.createElement('button');
+        btn.id = 'autoInputBtn';
+        btn.textContent = '自動入力';
+        btn.type = 'button';
+        btn.className = 'form-matrix-button form-button';
+        btn.onclick = autoInput;
+        const loginBtn = document.getElementById('btnLogin');
+        if (loginBtn) {
+            btn.style.height = loginBtn.offsetHeight + 'px';
+            btn.style.fontSize = window.getComputedStyle(loginBtn).fontSize;
+            btn.style.padding = window.getComputedStyle(loginBtn).padding;
+            btn.style.marginRight = '8px';
+        }
+        if (loginBtn && loginBtn.parentNode) {
+            loginBtn.parentNode.insertBefore(btn, loginBtn);
+        } else {
+            document.body.appendChild(btn);
+        }
+    }
+
+    // --- クリック ---
+    // i1.gif→A, i2.gif→B,...i16.gif→P, i17.gif→R,...i25.gif→Z（Qなし）で判定しクリック
+    function clickMatrixChar(char) {
+        const letters = [];
+        for (let i = 0, code = 65; i < 25; i++, code++) {
+            if (String.fromCharCode(code) === 'Q') code++;
+            letters.push(String.fromCharCode(code));
+        }
+        const btns = document.querySelectorAll('.input_imgdiv_class');
+        for (let btn of btns) {
+            const bg = btn.style.backgroundImage;
+            const m = bg.match(/i(\d{1,2})\.gif/i);
+            if (m) {
+                const idx = parseInt(m[1], 10) - 1;
+                if (letters[idx] === char) {
+                    btn.click();
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    // --- 自動入力 ---
+    async function autoInput() {
+        for (const c of PASSWORD) {
+            const ok = clickMatrixChar(c);
+            if (!ok) {
+                alert('エラー');
+                return;
+            }
+            await new Promise(r => setTimeout(r, 200));
+        }
+        const loginBtn = document.getElementById('btnLogin');
+        if (loginBtn) {
+            setTimeout(() => loginBtn.click(), 200);
+        }
+    }
+
+    // --- マトリクス出現監視 ---
+    function waitAndAddButton() {
+        if (document.getElementById('autoInputBtn')) return;
+        const matrix = document.querySelector('[id^="button0"].input_imgdiv_class');
+        if (matrix) {
+            addAutoButton();
+            return;
+        }
+        const observer = new MutationObserver(() => {
+            const m = document.querySelector('[id^="button0"].input_imgdiv_class');
+            if (m) {
+                addAutoButton();
+                observer.disconnect();
+            }
+        });
+        observer.observe(document.body, { childList: true, subtree: true });
+    }
+
+    // --- 初期化 ---
+    if (document.readyState === 'loading') {
+        window.addEventListener('DOMContentLoaded', waitAndAddButton);
+    } else {
+        waitAndAddButton();
+    }
+
+})();
+</code></pre>
+            </section>
+            <section>
+                <h3>補足・注意事項</h3>
+                <ul>
+                    <li>WisePointの仕様変更等で動作しなくなる場合があります</li>
+                    <li>不正利用・規約違反等の責任は一切負いません</li>
+                    <li>ご指摘・ご意見はXやメールでお気軽にどうぞ</li>
+                </ul>
+            </section>
+            <nav style="margin-top:2em;">
+                <a href="../index.html" class="home-btn">← ブログ一覧へ戻る</a>
+            </nav>
+        </article>
+    </main>
+    <footer>
+        <p>&copy; 2025 UltiMorse</p>
+    </footer>
+</body>
+
+</html>

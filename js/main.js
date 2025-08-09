@@ -1,6 +1,12 @@
 const articles = [
     // ここに記事を追加
     {
+        title: "信州大学ACSU多要素認証の自動化",
+        summary: "WisePointを自動化するTampermonkeyスクリプト",
+        url: "articles/2025-08-09-acsu-auto.html",
+        date: "2025-08-09"
+    },
+    {
         title: "AtCoderを始めた件",
         summary: "天才たちがひしめく謎の界隈に潜入",
         url: "articles/2025-06-22-atcoder-start.html",
@@ -20,7 +26,7 @@ const articles = [
     },
 ];
 
-const articlesPerPage = 2; // 1ページあたりの記事数(記事増えたら変える予定)
+const articlesPerPage = 3; // 1ページあたりの記事数(記事増えたら変える予定)
 let currentPage = 1;
 
 function renderArticles() {
