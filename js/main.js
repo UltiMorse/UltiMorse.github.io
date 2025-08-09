@@ -7,6 +7,12 @@ const articles = [
         date: "2025-08-09"
     },
     {
+        title: "レッツノートCF-FV4でFnキーとCtrlキーを入れ替える方法",
+        summary: "Fnが左下は使いにくいのでCtrlキーと入れ替える",
+        url: "articles/2025-07-17-ctl-fn-swap.html",
+        date: "2025-07-17"
+    },
+    {
         title: "AtCoderを始めた件",
         summary: "天才たちがひしめく謎の界隈に潜入",
         url: "articles/2025-06-22-atcoder-start.html",
@@ -26,7 +32,7 @@ const articles = [
     },
 ];
 
-const articlesPerPage = 3; // 1ページあたりの記事数(記事増えたら変える予定)
+const articlesPerPage = 4; // 1ページあたりの記事数(記事増えたら変える予定)
 let currentPage = 1;
 
 function renderArticles() {

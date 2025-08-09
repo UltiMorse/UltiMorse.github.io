@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>レッツノートCF-FV4でFnキーとCtrlキーを入れ替える方法</title>
+    <meta name="description" content="レッツノートCF-FV4でFnキーとCtrlキーをUEFI設定から入れ替える手順と、キーキャップの物理的な付け替え方法を解説。">
+    <meta name="keywords" content="レッツノート, Fnキー, Ctrlキー, 入れ替え, UEFI, BIOS, キーキャップ, CF-FV4, Panasonic, キーボードカスタマイズ">
+    <link rel="stylesheet" href="../css/style.css">
+    <!-- OGPタグ -->
+    <meta property="og:title" content="レッツノートCF-FV4でFnキーとCtrlキーを入れ替える方法">
+    <meta property="og:description" content="レッツノートCF-FV4でFnキーとCtrlキーをUEFI設定から入れ替える手順と、キーキャップの物理的な付け替え方法を解説。">
+    <meta property="og:image" content="https://ultimorse.github.io/img/ogp.png">
+    <meta property="og:url" content="https://ultimorse.github.io/articles/2025-07-17-ctl-fn-swap.html">
+    <meta property="og:type" content="article">
+    <!-- Twitterカード用タグ -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="レッツノートCF-FV4でFnキーとCtrlキーを入れ替える方法">
+    <meta name="twitter:description" content="レッツノートCF-FV4でFnキーとCtrlキーをUEFI設定から入れ替える手順と、キーキャップの物理的な付け替え方法を解説。">
+    <meta name="twitter:image" content="https://ultimorse.github.io/img/ogp.png">
+</head>
+
+<body>
+    <header>
+        <h1><a href="../index.html" style="text-decoration:none; color:inherit;">UltiMorseのブログ</a></h1>
+        <nav>
+            <ul>
+                <li><a href="https://github.com/UltiMorse" target="_blank" rel="noopener">GitHub</a></li>
+                <li><a href="https://atcoder.jp/users/UltiMorse" target="_blank" rel="noopener">AtCoder</a></li>
+                <li><a href="https://x.com/UltiMorse" target="_blank" rel="noopener">X（旧Twitter）</a></li>
+                <li><a href="https://www.youtube.com/@UltiMorse" target="_blank" rel="noopener">YouTube</a></li>
+            </ul>
+        </nav>
+    </header>
+    <nav aria-label="パンくずリスト" class="breadcrumb">
+        <ol>
+            <li><a href="../index.html">ホーム</a></li>
+            <li>レッツノートCF-FV4でFnキーとCtrlキーを入れ替える方法</li>
+        </ol>
+    </nav>
+    <main>
+        <article>
+            <header>
+                <h2>レッツノートCF-FV4でFnキーとCtrlキーを入れ替える方法</h2>
+                <span class="article-date"><small>2025年7月17日</small></span>
+            </header>
+            <section>
+                <h3>概要</h3>
+                <p>
+                    しばらく我慢して使っていましたが、左下がFnはやっぱり気持ちが悪いので入れ替えました。CF-FV4では、FnキーとCtrlキーの位置をUEFI（BIOS）設定から簡単に入れ替えることができます。さらに、物理的にキーキャップも付け替えることで、見た目も合わせることができます。（UEFI見てたら入れ替え項目を見つけたので思いつきました。)
+                </p>
+            </section>
+            <figure>
+                <img src="../images/images-2025-07-17/torihazushi.jpg" alt="キートップ交換画像">
+                <figcaption>きれいに外せる</figcaption>
+            </figure>
+            <section>
+                <h3>UEFI設定での入れ替え手順</h3>
+                <ol>
+                    <li>PCの電源を入れ、<b>F2キー</b>を連打してUEFIを起動（Windows設定の回復メニューからも入れる。）</li>
+                    <li>「メイン」タブに移動</li>
+                    <li>「Fn/Ctrlキー」または「FnとCtrlキーの入れ替え」項目を探す</li>
+                    <li>「標準」から「入れ換え」に変更</li>
+                    <li>設定を保存して再起動</li>
+                </ol>
+                <figure>
+                    <img src="../images/images-2025-07-17/UEFI.jpg" alt="UEFI画面">
+                    <figcaption>UEFI画面</figcaption>
+                </figure>
+                <p>これでソフトウェア的にFnキーとCtrlキーの機能が入れ替わります。</p>
+            </section>
+            <section>
+                <h3>キーキャップの取り外しと付け替え</h3>
+                <ol>
+                    <li>マイナスドライバーを右下から入れ、真ん中の方に慎重に挿入すると外れる。パンタグラフを破損しないように構造をよく見てから。<a
+                            href="https://faq-pc-support.connect.panasonic.com/faq/show/609?category_id=4&site_domain=default"
+                            target="_blank" rel="noopener">パンタグラフの構造</a><a
+                            href="https://shop.dynalabo.com/apps/note/panasonic_pc/34118/" target="_blank"
+                            rel="noopener">取り外し方の参考</a></li>
+                    <li>FnキーとCtrlキーのキャップを入れ替えて、上記のサイトを参考に取り付け</li>
+                </ol>
+                <p></p>
+            </section>
+            <section>
+                <h3>注意点</h3>
+                <ul>
+                    <li>キーキャップの取り外し、作業時の損害については自己責任で</li>
+                </ul>
+                <p>関連記事：<a href="../articles/2025-04-11-cf-fv4-ssd.html">Let's note CF-FV4のSSD交換</a></p>
+            </section>
+            <nav style="margin-top:2em;">
+                <a href="../index.html" class="home-btn">← ブログ一覧へ戻る</a>
+            </nav>
+        </article>
+
+    </main>
+    <footer>
+        <p>&copy; 2025 UltiMorse</p>
+    </footer>
+</body>
+
+</html>
