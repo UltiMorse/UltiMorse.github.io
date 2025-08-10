@@ -1,6 +1,12 @@
 const articles = [
     // ここに記事を追加
     {
+        title: "Google Search ConsoleでURLごとにインデックス申請する方法",
+        summary: "Google Search Consoleを使って、記事やページごとにインデックスをリクエスト",
+        url: "articles/2025-08-10-google-search-console.html",
+        date: "2025-08-10"
+    },
+    {
         title: "信州大学ACSU多要素認証の自動化",
         summary: "WisePointを自動化するTampermonkeyスクリプト",
         url: "articles/2025-08-09-acsu-auto.html",

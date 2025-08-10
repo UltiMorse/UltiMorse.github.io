@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google Search ConsoleでURLごとにインデックス申請する方法</title>
+    <meta name="description"
+        content="Google Search Consoleを使って、記事やページごとにインデックス登録をリクエストする具体的な手順と注意点を解説。新しい記事や更新内容を素早くGoogle検索に反映させたい方必見。">
+    <meta name="keywords" content="Google Search Console, インデックス申請, URL検査, SEO, サイト運営, 検索エンジン, ブログ, UltiMorse">
+    <link rel="stylesheet" href="../css/style.css">
+    <!-- OGPタグ -->
+    <meta property="og:title" content="Google Search ConsoleでURLごとにインデックス申請する方法">
+    <meta property="og:description"
+        content="Google Search Consoleを使って、記事やページごとにインデックス登録をリクエストする具体的な手順と注意点を解説。新しい記事や更新内容を素早くGoogle検索に反映させたい方必見。">
+    <meta property="og:image" content="https://ultimorse.github.io/img/ogp.png">
+    <meta property="og:url" content="https://ultimorse.github.io/articles/2025-08-10-google-search-console.html">
+    <meta property="og:type" content="article">
+    <!-- Twitterカード用タグ -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Google Search ConsoleでURLごとにインデックス申請する方法">
+    <meta name="twitter:description"
+        content="Google Search Consoleを使って、記事やページごとにインデックス登録をリクエストする具体的な手順と注意点を解説。新しい記事や更新内容を素早くGoogle検索に反映させたい方必見。">
+    <meta name="twitter:image" content="https://ultimorse.github.io/img/ogp.png">
+</head>
+
+<body>
+    <header>
+        <h1><a href="../index.html" style="text-decoration:none; color:inherit;">UltiMorseのブログ</a></h1>
+        <nav>
+            <ul>
+                <li><a href="https://github.com/UltiMorse" target="_blank" rel="noopener">GitHub</a></li>
+                <li><a href="https://atcoder.jp/users/UltiMorse" target="_blank" rel="noopener">AtCoder</a></li>
+                <li><a href="https://x.com/UltiMorse" target="_blank" rel="noopener">X（旧Twitter）</a></li>
+                <li><a href="https://www.youtube.com/@UltiMorse" target="_blank" rel="noopener">YouTube</a></li>
+            </ul>
+        </nav>
+    </header>
+    <nav aria-label="パンくずリスト" class="breadcrumb">
+        <ol>
+            <li><a href="../index.html">ホーム</a></li>
+            <li>GitHub pagesのサイトをGoogle検索</li>
+        </ol>
+    </nav>
+    <main>
+        <article>
+            <header>
+                <h2>GitHub pagesのサイトをGoogle検索</h2>
+                <span class="article-date"><small>2025年8月10日</small></span>
+            </header>
+
+            <section>
+                <h3>概要</h3>
+                <p>
+                    <a href="https://qiita.com/r_saiki/items/9ab3be34fa255724c9dd" target="_blank"
+                        rel="noopener">この記事</a>を参考に、GitHub
+                    PagesのサイトをGoogle検索に表示されるようにしましたが、なぜかトップページしかインデックスされませんでした。しかし、URL毎にインデックス申請できることに気づいたのでここにまとめます。
+                </p>
+
+                <h3>手順：URLごとにインデックス申請する方法</h3>
+                <ol>
+                    <li>Google Search Consoleにアクセスし、対象のプロパティ（サイト）を選択します。</li>
+                    <li>画面上部の「URL検査」欄に、インデックスさせたいページのURLを貼り付けてEnter。</li>
+                    <li>「URLがGoogleに登録されていません」または「インデックス登録済み」と表示されます。</li>
+                    <figure>
+                        <img src="../images/images-2025-08-10/googlesearch.png" alt="search consoleの画面">
+                        <figcaption>search consoleの画面</figcaption>
+                    </figure>
+                    <li>右側の「インデックス登録をリクエスト」ボタンをクリックします。</li>
+                    <li>「インデックス登録をリクエスト済み」と表示されれば完了です。</li>
+                </ol>
+
+
+                <h3>注意点・コツ</h3>   
+                <ul>
+                    <li>1日に申請できる回数には上限があるらしいので、重要なページを優先しましょう。</li>
+                    <li>「noindex」やrobots.txtでブロックされていると申請してもインデックスされません。</li>
+                    <li>自分の場合、次の日にはインデックスされていました。sitemapのときも早かったし、Googleは素晴らしい！！！</li>
+                    <li>何度も同じURLを申請しても効果は変わりません。</li>
+                </ul>
+
+                <h3>まとめ</h3>
+                <p>
+                    Google Search Consoleの「URL検査」機能を使えば、記事ごと・ページごとにインデックス申請ができます。<br>
+                    新しい記事が反映されないときは試してみてください。<br>
+                </p>
+
+                <h3>雑談</h3>
+                <p>
+                    このサイトもGitHub Pagesでホスティングしています。昔もhtmlとcssとjsでサイトを作ったことがあったので、このサイトはブログサイトとしては二代目です。<br>
+                    htmlで記事書いて、jsで記事一覧ページを生成しているだけなので、隅から隅まで管理しやすいのが嬉しいポイントですね。<br>
+                </p>
+                <p>関連記事：<a href="2025-08-09-acsu-auto.html">WisePoint画像認証自動化の手順</a></p>
+            </section>
+            <nav style="margin-top:2em;">
+                <a href="../index.html" class="home-btn">← ブログ一覧へ戻る</a>
+            </nav>
+        </article>
+    </main>
+    <footer>
+        <p>&copy; 2025 UltiMorse</p>
+    </footer>
+</body>
+
+</html>
