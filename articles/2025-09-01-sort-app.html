@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ソート学習アプリSortShroom🍄を作った | UltiMorseのブログ</title>
+    <meta name="description"
+        content="Next.jsで作ったソート可視化学習アプリSortShroom🍄の紹介。キノコを並び替えるアニメーションや音、アルゴリズムの設定など機能解説、開発のきっかけや技術的な感想も。">
+    <meta name="keywords"
+        content="ソート,アルゴリズム,可視化,アプリ,Next.js,React,JavaScript,TypeScript,プログラミング,学習,生成AI,SortShroom,キノコ,ピタゴラスイッチ">
+    <link rel="stylesheet" href="../css/style.css">
+    <!-- OGPタグ -->
+    <meta property="og:title" content="ソート学習アプリSortShroom🍄を作った | UltiMorseのブログ">
+    <meta property="og:description"
+        content="Next.jsで作ったソート可視化学習アプリSortShroom🍄の紹介。キノコを並び替えるアニメーションや音、アルゴリズムの設定など機能解説、開発のきっかけや技術的な感想も。">
+    <meta property="og:image" content="https://ultimorse.github.io/img/ogp.png">
+    <meta property="og:url" content="https://ultimorse.github.io/articles/2025-09-01-sort-app.html">
+    <meta property="og:type" content="article">
+    <!-- Twitterカード用タグ -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="ソート学習アプリSortShroom🍄を作った | UltiMorseのブログ">
+    <meta name="twitter:description"
+        content="Next.jsで作ったソート可視化学習アプリSortShroom🍄の紹介。キノコを並び替えるアニメーションや音、アルゴリズムの設定など機能解説、開発のきっかけや技術的な感想も。">
+    <meta name="twitter:image" content="https://ultimorse.github.io/img/ogp.png">
+    <!-- Apple Touch Icons & Favicon -->
+    <link rel="apple-touch-icon" href="/img/apple-touch-icon.jpg">
+    <link rel="icon" href="/img/favicon.ico" type="image/x-icon">
+</head>
+
+<body>
+    <header>
+        <h1><a href="../index.html" style="text-decoration:none; color:inherit;">UltiMorseのブログ</a></h1>
+        <nav>
+            <ul>
+                <li><a href="https://github.com/UltiMorse" target="_blank" rel="noopener">GitHub</a></li>
+                <li><a href="https://x.com/UltiMorse" target="_blank" rel="noopener">X（旧Twitter）</a></li>
+                <li><a href="https://www.youtube.com/@UltiMorse" target="_blank" rel="noopener">YouTube</a></li>
+            </ul>
+        </nav>
+    </header>
+    <nav aria-label="パンくずリスト" class="breadcrumb">
+        <ol>
+            <li><a href="../index.html">ホーム</a></li>
+            <li>ソート学習アプリSortShroom🍄を作った</li>
+        </ol>
+    </nav>
+    <main>
+        <article>
+            <header>
+                <h2>ソート学習アプリSortShroom🍄を作った</h2>
+                <span class="article-date"><small>2025年9月1日</small></span>
+                <p style="margin-top:1em;"><a href="https://sortshroom.vercel.app/" target="_blank" rel="noopener"
+                        style="font-weight:bold;">▶ ソート学習アプリSortShroom🍄を使ってみる</a></p>
+            </header>
+
+            <section>
+                <h3>なぜソート可視化アプリを作ったのか</h3>
+                <p>
+                    　NHKのピタゴラスイッチでしめじソートというものがありました。数年前のことですが、しめじを分解して並べてみようという発想がおもしろかったので、印象に残っています。それにインスパイアされたという感じですね。
+                </p>
+                <p>
+                    　作成時期は、筆者が大学のアルゴリズム基礎の授業を受けているときでした。基礎とつくように、授業内容は結構簡単だったので、授業中に作成していました。（後輩の方は連絡をくれれば、過去問数年分をまとめて解説した、楽々100点チートシートを渡せます。）フレームワークというのをなんとなく使ってみようという気持ちでした。Next.jsを使ったアプリ開発の本を買って読みましたが、いまいち時間がなかったので、とりあえず形にしただけです。AIもゴリゴリ使って汚いので、細かいことは今後理解しよう......。
+                </p>
+
+                <h3>アプリの機能</h3>
+
+                <ul>
+                    <li>キノコを並び替えるアニメーションを再生</li>
+                    <li>数とアルゴリズムの種類の設定</li>
+                    <li>ポコポコと並べ替え時に音が出る</li>
+                    <figure>
+                        <img src="../images/images-2025-09-01/sortshroom.png" alt="画像説明">
+                        <figcaption>アプリ画面のスクリーンショット</figcaption>
+                    </figure>
+                </ul>
+
+
+                <h3>フレームワークについて思ったこと。</h3>
+                <p>
+                    　Next.jsは難しい。まずはReactを理解しましょう。JavaScriptもコピペ魔神でいるのに、TypeScriptを使うなどは無謀であり、フレームワーク云々よりも基本的なことができないとだめだなぁという感想です。まぁなんとなく動いたのでまぁええかぁ（全くよくないです）。フレームワークとはそもそも、よく使うものを簡単に使えるようにするためのもの（間違ってたらすみません。連絡をください。教えて下さい。）なので、基礎を理解していないものにとっては無意味なのかも。
+                </p>
+
+                <h3>まとめ</h3>
+                <p>
+                    　物を作りたければ勉強をと思いますが、とりあえず作りながら学ぶと見えてくるものもあるし、結局は手を動かすのが一番大切だと思いました。しかし、基礎がないところにLLMを使ったコーディングをしてしまうことの危険性は身にしみたものであります。これはこれからの生成AI時代において、重要な気づきだと思います。
+                </p>
+                <p>
+                    　フレームワークって便利なのかもしれないけど、本質的に理解していない人（今の私のように）がLLMとかでテキトーにいじくると大惨事になりそうだなぁと感じた次第であります（笑）。
+                </p>
+                <p>
+                    最後に、ソート学習アプリSortShroom🍄は、以下のURLからアクセスできます。Vercelでデプロイしました。
+                </p>
+
+                <p>
+                    <a href="https://sortshroom.vercel.app/" target="_blank"
+                        rel="noopener">https://sortshroom.vercel.app/</a>
+                </p>
+                <p>関連記事：<a href="2025-08-09-acsu-auto.html">信州大学ACSU多要素認証の自動化</a></p>
+            </section>
+            <nav style="margin-top:2em;">
+                <a href="../index.html" class="home-btn">← ブログ一覧へ戻る</a>
+            </nav>
+        </article>
+    </main>
+    <footer>
+        <p>&copy; 2025 UltiMorse</p>
+    </footer>
+</body>
+
+</html>

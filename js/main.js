@@ -1,6 +1,12 @@
 const articles = [
     // ここに記事を追加
     {
+        title: "ソート学習アプリSortShroom🍄を作った",
+        summary: "少し前にNext.jsで作ったソート可視化学習アプリSortShroom🍄の紹介",
+        url: "articles/2025-09-01-sort-app.html",
+        date: "2025-09-01"
+    },
+    {
         title: "Google Search ConsoleでURLごとにインデックス申請する方法",
         summary: "Google Search Consoleを使って、記事やページごとにインデックスをリクエスト",
         url: "articles/2025-08-10-google-search-console.html",
