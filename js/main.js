@@ -47,7 +47,17 @@ const articles = [
 const articlesPerPage = 4; // 1ページあたりの記事数(記事増えたら変える予定)
 let currentPage = 1;
 
+function setPageFromHash() {
+    const hash = location.hash.match(/page=(\d+)/);
+    currentPage = hash ? Math.max(1, Math.min(Number(hash[1]), Math.ceil(articles.length / articlesPerPage))) : 1;
+}
+
+function updateHash(page) {
+    location.hash = `page=${page}`;
+}
+
 function renderArticles() {
+    setPageFromHash();
     const blogSection = document.getElementById('blog');
     const totalPages = Math.ceil(articles.length / articlesPerPage);
 
@@ -80,25 +90,23 @@ function renderArticles() {
 
     blogSection.innerHTML = articlesHTML + pagerHTML;
 
-    // イベント設定
-    document.getElementById('prev').onclick = () => {
-        if (currentPage > 1) {
-            currentPage--;
-            renderArticles();
-        }
-    };
-    document.getElementById('next').onclick = () => {
-        if (currentPage < totalPages) {
-            currentPage++;
-            renderArticles();
-        }
-    };
-    document.querySelectorAll('.page-btn').forEach(btn => {
-        btn.onclick = () => {
-            currentPage = Number(btn.dataset.page);
-            renderArticles();
+        // イベント設定
+        document.getElementById('prev').onclick = () => {
+            if (currentPage > 1) {
+                updateHash(currentPage - 1); // ハッシュでページ数を保持(urlに#page=nのように)
+            }
         };
-    });
+        document.getElementById('next').onclick = () => {
+            if (currentPage < totalPages) {
+                updateHash(currentPage + 1);
+            }
+        };
+        document.querySelectorAll('.page-btn').forEach(btn => {
+            btn.onclick = () => {
+                updateHash(Number(btn.dataset.page));
+            };
+        });
 }
 
+window.addEventListener('hashchange', renderArticles);
 window.onload = renderArticles;
