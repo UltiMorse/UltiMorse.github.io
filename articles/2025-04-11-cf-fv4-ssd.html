@@ -42,110 +42,150 @@
             <li>Let's note CF-FV4のSSD交換</li>
         </ol>
     </nav>
-    <main>
-        <div style="text-align:right; margin: 0.5em 0 0.5em 0;">
-            <a href="https://amzn.to/4gnzhJL" target="_blank" rel="noopener"
-                style="display:inline-block; background:#ffb347; color:#000000; font-weight:normal; padding:0.3em 0.8em; border-radius:6px; text-decoration:none; font-size:0.95em; border:1.5px solid #ffb347; box-shadow:none; opacity:0.8; transition:background 0.2s, color 0.2s;">
-                このリンクから買うと応援になります(amazonアソシエイト)
-            </a>
-        </div>
-        <article>
-            <header>
-                <h2>Let's note CF-FV4のSSD交換</h2>
-                <span class="article-date"><small>2025年4月11日</small></span>
-            </header>
-            <section>
-                <h3>はじめに</h3>
-                <p>
-                    生協モデルCF-FV4のSSDが256GBしかなかったので、思い切って1TBに換装しました。<br>
-                    この記事では、分解方法や交換手順、注意点、交換後の感想などをまとめます。
-                </p>
+    <main class="layout-two-column">
+        <div class="primary-area">
+            <div class="support-banner" role="complementary" aria-label="サイト支援リンク">
+                <a class="support-banner__link" href="https://amzn.to/4gnzhJL" target="_blank" rel="noopener"
+                    aria-label="Amazonアソシエイト支援リンク (新しいタブ)">
+                    <span class="support-banner__icon" aria-hidden="true">🛒</span>
+                    <span class="support-banner__text">Amazon購入でこのブログを応援</span>
+                </a>
+            </div>
+            <article>
+                <header>
+                    <h2>Let's note CF-FV4のSSD交換</h2>
+                    <span class="article-date"><small>2025年4月11日</small></span>
+                </header>
+                <section>
+                    <h3>はじめに</h3>
+                    <p>
+                        生協モデルCF-FV4のSSDが256GBしかなかったので、思い切って1TBに換装しました。<br>
+                        この記事では、分解方法や交換手順、注意点、交換後の感想などをまとめます。
+                    </p>
 
-                <h3>分解とSSDの取り外し</h3>
-                <p>
-                    分解方法は
-                    <a href="https://shop.applied-net.co.jp/blog/cate_news/22935/" target="_blank"
-                        rel="noopener">こちら</a>
-                    のサイトを参考にしました。<br>
-                    Windowsの再インストール方法などは記載されていなかったので、この記事で補足します。
-                </p>
-                <figure>
-                    <img src="../images/images-2025-04-11/pcbunnkai.jpg" alt="CF-FV4内部の画像">
-                    <figcaption>CF-FV4の内部。中央やや右にSSDが見えます。</figcaption>
-                </figure>
-                <p>
-                    分解作業はとても簡単で、特に危険なポイントはありませんでした。<br>
-                    ネジを外してカバーを開けると、すぐにSSDにアクセスできます。
-                </p>
-                <p>
-                    今回使用したSSDは「Crucial T500 1TB」です。<br>
-                    もともと入っていたSSDはSAMSUNG製のPCIe4.0対応M.2 SSDでしたが、OEM品で型番のシールが見えず詳細は不明でした。<br>
-                    書き込み速度はやや遅めのものでした。
-                </p>
-                <figure>
-                    <img src="../images/images-2025-04-11/ssd.jpg" alt="使用したSSDの画像">
-                    <figcaption>今回換装したCrucial T500 1TB。</figcaption>
-                </figure>
-                <div style="margin: 1em 0;">
-                    <a href="https://amzn.to/3HWh1dw" target="_blank" rel="nofollow noopener"
-                        style="display:inline-block; background:#ff9900; color:#fff; padding:0.7em 1.2em; border-radius:4px; text-decoration:none; font-weight:bold;">
-                        Amazonで「SSD」を見る
-                    </a>
-                </div>
-                <h3>Windowsの再インストールと注意点</h3>
-                <p>
-                    SSD交換後は、Windowsの再インストールが必要です。<br>
-                    CF-FV4にはSSDとは別に回復領域が用意されていないため、交換前に必ず回復ドライブを作成しておきましょう。
-                </p>
-                <p>
-                    回復ドライブの作成は、Windowsの設定から「更新とセキュリティ」→「回復」→「回復ドライブの作成」で行えます。<br>
-                    USBメモリは32GB以上をおすすめします。
-                </p>
-                <p>
-                    私はKIOXIAの64GB USBメモリを使用しました。パーティションで区切られるので、32GBで十分だと思います。ヤマダ電機でセールだったので選びましたが、暗号化機能付きは避けた方が無難です。
-                </p>
-                <div style="margin: 1em 0;">
-                    <a href="https://amzn.to/3JH4XNF" target="_blank" rel="nofollow noopener"
-                        style="display:inline-block; background:#ff9900; color:#fff; padding:0.7em 1.2em; border-radius:4px; text-decoration:none; font-weight:bold;">
-                        Amazonで「USBメモリ」を見る
-                    </a>
-                </div>
-                <p>
-                    回復ドライブを作成したら、SSD交換後のCF-FV4に接続して電源を入れ、BIOS設定でUSBから起動するようにします。<br>
-                    その後、回復ドライブからWindowsのインストールを行います。<br>
-                    インストールは指示に従うだけで完了します。
-                </p>
+                    <h3>分解とSSDの取り外し</h3>
+                    <p>
+                        分解方法は
+                        <a href="https://shop.applied-net.co.jp/blog/cate_news/22935/" target="_blank"
+                            rel="noopener">こちら</a>
+                        のサイトを参考にしました。<br>
+                        Windowsの再インストール方法などは記載されていなかったので、この記事で補足します。
+                    </p>
+                    <figure>
+                        <img src="../images/images-2025-04-11/pcbunnkai.jpg" alt="CF-FV4内部の画像">
+                        <figcaption>CF-FV4の内部。中央やや右にSSDが見えます。</figcaption>
+                    </figure>
+                    <p>
+                        分解作業はとても簡単で、特に危険なポイントはありませんでした。<br>
+                        ネジを外してカバーを開けると、すぐにSSDにアクセスできます。
+                    </p>
+                    <p>
+                        今回使用したSSDは「Crucial T500 1TB」です。<br>
+                        もともと入っていたSSDはSAMSUNG製のPCIe4.0対応M.2 SSDでしたが、OEM品で型番のシールが見えず詳細は不明でした。<br>
+                        書き込み速度はやや遅めのものでした。
+                    </p>
+                    <figure>
+                        <img src="../images/images-2025-04-11/ssd.jpg" alt="使用したSSDの画像">
+                        <figcaption>今回換装したCrucial T500 1TB。</figcaption>
+                    </figure>
+                    <div style="margin: 1em 0;">
+                        <a href="https://amzn.to/3HWh1dw" target="_blank" rel="nofollow noopener"
+                            style="display:inline-block; background:#ff9900; color:#fff; padding:0.7em 1.2em; border-radius:4px; text-decoration:none; font-weight:bold;">
+                            Amazonで「SSD」を見る
+                        </a>
+                    </div>
+                    <h3>Windowsの再インストールと注意点</h3>
+                    <p>
+                        SSD交換後は、Windowsの再インストールが必要です。<br>
+                        CF-FV4にはSSDとは別に回復領域が用意されていないため、交換前に必ず回復ドライブを作成しておきましょう。
+                    </p>
+                    <p>
+                        回復ドライブの作成は、Windowsの設定から「更新とセキュリティ」→「回復」→「回復ドライブの作成」で行えます。<br>
+                        USBメモリは32GB以上をおすすめします。
+                    </p>
+                    <p>
+                        私はKIOXIAの64GB
+                        USBメモリを使用しました。パーティションで区切られるので、32GBで十分だと思います。ヤマダ電機でセールだったので選びましたが、暗号化機能付きは避けた方が無難です。
+                    </p>
+                    <div style="margin: 1em 0;">
+                        <a href="https://amzn.to/3JH4XNF" target="_blank" rel="nofollow noopener"
+                            style="display:inline-block; background:#ff9900; color:#fff; padding:0.7em 1.2em; border-radius:4px; text-decoration:none; font-weight:bold;">
+                            Amazonで「USBメモリ」を見る
+                        </a>
+                    </div>
+                    <p>
+                        回復ドライブを作成したら、SSD交換後のCF-FV4に接続して電源を入れ、BIOS設定でUSBから起動するようにします。<br>
+                        その後、回復ドライブからWindowsのインストールを行います。<br>
+                        インストールは指示に従うだけで完了します。
+                    </p>
 
-                <h3>交換後のベンチマーク</h3>
-                <p>
-                    交換後のSSDの速度は以下の通りです。
-                </p>
-                <pre><code>Read: 5,159 MB/s
+                    <h3>交換後のベンチマーク</h3>
+                    <p>
+                        交換後のSSDの速度は以下の通りです。
+                    </p>
+                    <pre><code>Read: 5,159 MB/s
 Write: 4,074 MB/s</code></pre>
-                <figure>
-                    <img src="../images/images-2025-04-11/ssd-speed.png" alt="SSD速度測定結果の画像">
-                    <figcaption>Crucial T500 1TBのベンチマーク結果。</figcaption>
-                </figure>
-                <p>
-                    交換前のSSDと比べて、読み書き速度が大きく向上しました。<br>
-                    大きなデータを扱うときは、体感でも速さを感じます。
-                </p>
+                    <figure>
+                        <img src="../images/images-2025-04-11/ssd-speed.png" alt="SSD速度測定結果の画像">
+                        <figcaption>Crucial T500 1TBのベンチマーク結果。</figcaption>
+                    </figure>
+                    <p>
+                        交換前のSSDと比べて、読み書き速度が大きく向上しました。<br>
+                        大きなデータを扱うときは、体感でも速さを感じます。
+                    </p>
 
-                <h3>まとめ・感想</h3>
-                <p>
-                    SSDの容量が増えたことで、CF-FV4がより快適に使えるようになりました。<br>
-                    大学だけで使うなら標準容量でも十分ですが、いろいろなソフトを入れたい自分には1TB換装は大満足です。
-                </p>
-                <p>
-                    もしCF-FV4を使っていてSSD容量に不満がある方は、ぜひ交換を検討してみてください。<br>
-                    自己責任にはなりますが、パソコン好きな方ならきっと自分でできると思います！
-                </p>
-                <p>関連記事：<a href="../articles/2025-04-20-ps4-ssd.html">PS4 ProのHDDをSSDに換装</a></p>
+                    <h3>まとめ・感想</h3>
+                    <p>
+                        SSDの容量が増えたことで、CF-FV4がより快適に使えるようになりました。<br>
+                        大学だけで使うなら標準容量でも十分ですが、いろいろなソフトを入れたい自分には1TB換装は大満足です。
+                    </p>
+                    <p>
+                        もしCF-FV4を使っていてSSD容量に不満がある方は、ぜひ交換を検討してみてください。<br>
+                        自己責任にはなりますが、パソコン好きな方ならきっと自分でできると思います！
+                    </p>
+                    <p>関連記事：<a href="../articles/2025-04-20-ps4-ssd.html">PS4 ProのHDDをSSDに換装</a></p>
+                </section>
+                <nav style="margin-top:2em;">
+                    <a href="../index.html" class="home-btn">← ブログ一覧へ戻る</a>
+                </nav>
+            </article>
+        </div>
+        <aside class="sidebar" aria-label="サイト補助情報">
+            <section class="profile-card" aria-labelledby="profile-heading">
+                <h2 id="profile-heading">管理人プロフィール</h2>
+                <img src="/img/apple-touch-icon.jpg" alt="サイト管理人アイコン" class="profile-avatar" loading="lazy">
+                <p class="profile-name">UltiMorse</p>
+                <p class="profile-text">大学生です。プログラミング / 競プロ / ガジェットなどについて気ままに書いています。</p>
+                <ul class="profile-links">
+                    <li><a href="https://github.com/UltiMorse" target="_blank" rel="noopener">GitHub</a></li>
+                    <li><a href="https://atcoder.jp/users/UltiMorse" target="_blank" rel="noopener">AtCoder</a></li>
+                    <li><a href="https://x.com/UltiMorse" target="_blank" rel="noopener">X</a></li>
+                    <li><a href="https://www.youtube.com/@UltiMorse" target="_blank" rel="noopener">YouTube</a></li>
+                </ul>
             </section>
-            <nav style="margin-top:2em;">
-                <a href="../index.html" class="home-btn">← ブログ一覧へ戻る</a>
-            </nav>
-        </article>
+            <section class="site-search" aria-labelledby="search-heading">
+                <h2 id="search-heading">サイト内検索</h2>
+                <form id="search-form" role="search" aria-label="記事検索" onsubmit="return false;">
+                    <label for="site-search" class="visually-hidden">検索ワード</label>
+                    <input type="search" id="site-search" placeholder="キーワード検索" autocomplete="off">
+                    <button type="button" id="clear-search" aria-label="検索をクリア" title="検索をクリア">×</button>
+                </form>
+                <p class="search-result-info" id="search-result-info" aria-live="polite"></p>
+            </section>
+            <section class="categories-card" aria-label="カテゴリー">
+                <h2>カテゴリー</h2>
+                <ul class="category-list"></ul>
+                <button type="button" class="clear-category-btn" aria-label="カテゴリー解除">全て表示</button>
+            </section>
+            <section class="popular-card" aria-label="人気記事">
+                <h2>人気記事</h2>
+                <ul class="popular-list"></ul>
+            </section>
+            <section class="recommended-card" aria-label="おすすめ記事">
+                <h2>おすすめ記事</h2>
+                <ul class="recommended-list"></ul>
+            </section>
+        </aside>
     </main>
     <footer>
         <p>
@@ -153,6 +193,24 @@ Write: 4,074 MB/s</code></pre>
         </p>
         <p>&copy; 2025 UltiMorse</p>
     </footer>
+    <div class="mobile-bottom-nav" aria-label="モバイルナビゲーション">
+        <button type="button" class="mb-nav-btn" data-action="menu" aria-label="メニュー">
+            <span class="icon" aria-hidden="true">☰</span><span class="label">メニュー</span>
+        </button>
+        <button type="button" class="mb-nav-btn" data-action="home" aria-label="ホーム">
+            <span class="icon" aria-hidden="true">🏠</span><span class="label">ホーム</span>
+        </button>
+        <button type="button" class="mb-nav-btn" data-action="search" aria-label="検索">
+            <span class="icon" aria-hidden="true">🔍</span><span class="label">検索</span>
+        </button>
+        <button type="button" class="mb-nav-btn" data-action="top" aria-label="トップへ">
+            <span class="icon" aria-hidden="true">⬆</span><span class="label">トップ</span>
+        </button>
+        <button type="button" class="mb-nav-btn" data-action="sidebar" aria-label="サイドバー表示切替">
+            <span class="icon" aria-hidden="true">≡</span><span class="label">サイドバー</span>
+        </button>
+    </div>
+    <script src="../js/main.js" defer></script>
 </body>
 
 </html>

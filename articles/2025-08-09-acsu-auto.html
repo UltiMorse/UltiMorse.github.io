@@ -46,14 +46,15 @@
             <li>信州大学ACSU多要素認証の自動化</li>
         </ol>
     </nav>
-    <main>
-        <div style="text-align:right; margin: 0.5em 0 0.5em 0;">
-            <a href="https://amzn.to/4gnzhJL" target="_blank" rel="noopener"
-                style="display:inline-block; background:#ffb347; color:#000000; font-weight:normal; padding:0.3em 0.8em; border-radius:6px; text-decoration:none; font-size:0.95em; border:1.5px solid #ffb347; box-shadow:none; opacity:0.8; transition:background 0.2s, color 0.2s;">
-                このリンクから買うと応援になります(amazonアソシエイト)
-            </a>
-        </div>
-        <article>
+    <main class="layout-two-column">
+        <div class="primary-area">
+            <div class="support-banner" role="complementary" aria-label="サイト支援リンク">
+                <a class="support-banner__link" href="https://amzn.to/4gnzhJL" target="_blank" rel="noopener" aria-label="Amazonアソシエイト支援リンク (新しいタブ)">
+                    <span class="support-banner__icon" aria-hidden="true">🛒</span>
+                    <span class="support-banner__text">Amazon購入でこのブログを応援</span>
+                </a>
+            </div>
+            <article>
             <header>
                 <h2>信州大学ACSU多要素認証の自動化</h2>
                 <span class="article-date"><small>2025年8月09日</small></span>
@@ -235,7 +236,44 @@
             <nav style="margin-top:2em;">
                 <a href="../index.html" class="home-btn">← ブログ一覧へ戻る</a>
             </nav>
-        </article>
+            </article>
+        </div>
+        <aside class="sidebar" aria-label="サイト補助情報">
+            <section class="profile-card" aria-labelledby="profile-heading">
+                <h2 id="profile-heading">管理人プロフィール</h2>
+                <img src="/img/apple-touch-icon.jpg" alt="サイト管理人アイコン" class="profile-avatar" loading="lazy">
+                <p class="profile-name">UltiMorse</p>
+                <p class="profile-text">大学生です。プログラミング / 競プロ / ガジェットなどについて気ままに書いています。</p>
+                <ul class="profile-links">
+                    <li><a href="https://github.com/UltiMorse" target="_blank" rel="noopener">GitHub</a></li>
+                    <li><a href="https://atcoder.jp/users/UltiMorse" target="_blank" rel="noopener">AtCoder</a></li>
+                    <li><a href="https://x.com/UltiMorse" target="_blank" rel="noopener">X</a></li>
+                    <li><a href="https://www.youtube.com/@UltiMorse" target="_blank" rel="noopener">YouTube</a></li>
+                </ul>
+            </section>
+            <section class="site-search" aria-labelledby="search-heading">
+                <h2 id="search-heading">サイト内検索</h2>
+                <form id="search-form" role="search" aria-label="記事検索" onsubmit="return false;">
+                    <label for="site-search" class="visually-hidden">検索ワード</label>
+                    <input type="search" id="site-search" placeholder="キーワード検索" autocomplete="off">
+                    <button type="button" id="clear-search" aria-label="検索をクリア" title="検索をクリア">×</button>
+                </form>
+                <p class="search-result-info" id="search-result-info" aria-live="polite"></p>
+            </section>
+            <section class="categories-card" aria-label="カテゴリー" >
+                <h2>カテゴリー</h2>
+                <ul class="category-list"></ul>
+                <button type="button" class="clear-category-btn" aria-label="カテゴリー解除">全て表示</button>
+            </section>
+            <section class="popular-card" aria-label="人気記事">
+                <h2>人気記事</h2>
+                <ul class="popular-list"></ul>
+            </section>
+            <section class="recommended-card" aria-label="おすすめ記事">
+                <h2>おすすめ記事</h2>
+                <ul class="recommended-list"></ul>
+            </section>
+        </aside>
     </main>
     <footer>
         <p>
@@ -243,6 +281,24 @@
         </p>
         <p>&copy; 2025 UltiMorse</p>
     </footer>
+    <div class="mobile-bottom-nav" aria-label="モバイルナビゲーション">
+        <button type="button" class="mb-nav-btn" data-action="menu" aria-label="メニュー">
+            <span class="icon" aria-hidden="true">☰</span><span class="label">メニュー</span>
+        </button>
+        <button type="button" class="mb-nav-btn" data-action="home" aria-label="ホーム">
+            <span class="icon" aria-hidden="true">🏠</span><span class="label">ホーム</span>
+        </button>
+        <button type="button" class="mb-nav-btn" data-action="search" aria-label="検索">
+            <span class="icon" aria-hidden="true">🔍</span><span class="label">検索</span>
+        </button>
+        <button type="button" class="mb-nav-btn" data-action="top" aria-label="トップへ">
+            <span class="icon" aria-hidden="true">⬆</span><span class="label">トップ</span>
+        </button>
+        <button type="button" class="mb-nav-btn" data-action="sidebar" aria-label="サイドバー表示切替">
+            <span class="icon" aria-hidden="true">≡</span><span class="label">サイドバー</span>
+        </button>
+    </div>
+    <script src="../js/main.js" defer></script>
 </body>
 
 </html>
