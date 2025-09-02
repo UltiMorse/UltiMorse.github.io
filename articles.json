@@ -1,0 +1,65 @@
+[
+  {
+    "title": "ソート学習アプリSortShroom🍄を作った",
+    "summary": "少し前にNext.jsで作ったソート可視化学習アプリSortShroom🍄の紹介",
+    "url": "articles/2025-09-01-sort-app.html",
+    "date": "2025-09-01",
+    "category": "開発",
+    "views": 180,
+    "recommended": true
+  },
+  {
+    "title": "Google Search ConsoleでURLごとにインデックス申請する方法",
+    "summary": "Google Search Consoleを使って、記事やページごとにインデックスをリクエスト",
+    "url": "articles/2025-08-10-google-search-console.html",
+    "date": "2025-08-10",
+    "category": "SEO",
+    "views": 90,
+    "recommended": false
+  },
+  {
+    "title": "信州大学ACSU多要素認証の自動化",
+    "summary": "WisePointを自動化するTampermonkeyスクリプト",
+    "url": "articles/2025-08-09-acsu-auto.html",
+    "date": "2025-08-09",
+    "category": "自動化",
+    "views": 200,
+    "recommended": true
+  },
+  {
+    "title": "レッツノートCF-FV4でFnキーとCtrlキーを入れ替える方法",
+    "summary": "Fnが左下は使いにくいのでCtrlキーと入れ替える",
+    "url": "articles/2025-07-17-ctl-fn-swap.html",
+    "date": "2025-07-17",
+    "category": "PC",
+    "views": 100,
+    "recommended": false
+  },
+  {
+    "title": "AtCoderを始めた件",
+    "summary": "天才たちがひしめく謎の界隈に潜入",
+    "url": "articles/2025-06-22-atcoder-start.html",
+    "date": "2025-06-22",
+    "category": "競プロ",
+    "views": 120,
+    "recommended": true
+  },
+  {
+    "title": "PS4 ProのHDDをSSDに換装",
+    "summary": "PS4 ProのHDDを余ったSSDに換装して快適になった話",
+    "url": "articles/2025-04-20-ps4-ssd.html",
+    "date": "2025-04-20",
+    "category": "PS4",
+    "views": 160,
+    "recommended": true
+  },
+  {
+    "title": "Let's note CF-FV4のSSD交換",
+    "summary": "生協モデルCF-FV4のSSDが256GBしかなかったので1TBに換装した話",
+    "url": "articles/2025-04-11-cf-fv4-ssd.html",
+    "date": "2025-04-11",
+    "category": "PC",
+    "views": 140,
+    "recommended": true
+  }
+]

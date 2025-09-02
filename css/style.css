@@ -211,8 +211,11 @@ article img {
 }
 
 .breadcrumb {
-  margin: 20px 0 30px 0;
+  margin: 20px auto 30px auto; /* main と同じ中央寄せ */
   font-size: 1em;
+  max-width: 1180px; /* main と揃える */
+  padding: 0 18px; /* main の左右余白に合わせる */
+  box-sizing: border-box;
 }
 .breadcrumb ol {
   list-style: none;
@@ -320,6 +323,11 @@ footer {
     margin: 18px 1vw 0 1vw;
     padding: 0 2vw 18px 2vw;
     border-radius: 10px;
+  }
+  .breadcrumb {
+    max-width: 98vw;
+    padding: 0 2vw;
+    margin: 14px 1vw 24px 1vw; /* 少し詰める */
   }
   .layout-two-column { flex-direction: column; }
   /* モバイルでは常設のサイドバーは非表示（フローティングパネルのみ使用） */

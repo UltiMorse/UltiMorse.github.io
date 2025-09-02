@@ -1,78 +1,37 @@
-const articles = [
-    // ここに記事を追加
-    {
-        title: "ソート学習アプリSortShroom🍄を作った",
-        summary: "少し前にNext.jsで作ったソート可視化学習アプリSortShroom🍄の紹介",
-        url: "articles/2025-09-01-sort-app.html",
-    date: "2025-09-01",
-    category: '開発',
-    views: 120,
-    recommended: true
-    },
-    {
-        title: "Google Search ConsoleでURLごとにインデックス申請する方法",
-        summary: "Google Search Consoleを使って、記事やページごとにインデックスをリクエスト",
-        url: "articles/2025-08-10-google-search-console.html",
-    date: "2025-08-10",
-    category: 'SEO',
-    views: 60,
-    recommended: false
-    },
-    {
-        title: "信州大学ACSU多要素認証の自動化",
-        summary: "WisePointを自動化するTampermonkeyスクリプト",
-        url: "articles/2025-08-09-acsu-auto.html",
-    date: "2025-08-09",
-    category: '自動化',
-    views: 80,
-    recommended: true
-    },
-    {
-        title: "レッツノートCF-FV4でFnキーとCtrlキーを入れ替える方法",
-        summary: "Fnが左下は使いにくいのでCtrlキーと入れ替える",
-        url: "articles/2025-07-17-ctl-fn-swap.html",
-    date: "2025-07-17",
-    category: 'PC',
-    views: 150,
-    recommended: false
-    },
-    {
-        title: "AtCoderを始めた件",
-        summary: "天才たちがひしめく謎の界隈に潜入",
-        url: "articles/2025-06-22-atcoder-start.html",
-    date: "2025-06-22",
-    category: '競プロ',
-    views: 90,
-    recommended: true
-    },
-    {
-        title: "PS4 ProのHDDをSSDに換装",
-        summary: "PS4 ProのHDDを余ったSSDに換装して快適になった話",
-        url: "articles/2025-04-20-ps4-ssd.html",
-    date: "2025-04-20",
-    category: 'PS4',
-    views: 110,
-    recommended: false
-    },
-    {
-        title: "Let's note CF-FV4のSSD交換",
-        summary: "生協モデルCF-FV4のSSDが256GBしかなかったので1TBに換装した話",
-        url: "articles/2025-04-11-cf-fv4-ssd.html",
-    date: "2025-04-11",
-    category: 'PC',
-    views: 200,
-    recommended: true
-    },
-];
+const CONFIG = Object.freeze({
+    // 人気記事の固定順 (空配列なら views 降順)
+    popularOrder: [
+        // 'articles/2025-04-11-cf-fv4-ssd.html',
+    ],
+    popularCount: 4,          // 人気記事表示件数
+    articlesPerPage: 4,       // 1ページあたりの記事数
+    navScrollHintTimeout: 5500 // モバイルナビ横スクロールヒント表示時間(ms)
+});
 
-// ===== 人気記事の並びを固定したい場合はここでURL(または相対パス)を並べる =====
-// 空配列/未設定なら views 降順の上位を使用
-const popularOrder = [
-    // 例: 'articles/2025-04-11-cf-fv4-ssd.html', 'articles/2025-07-17-ctl-fn-swap.html'
-];
-const popularCount = 3; // 表示件数
+let articles = [];
+// 外部JSONから記事メタデータを取得
+async function loadArticles() {
+    try {
+        const res = await fetch(rootPrefix() + 'articles.json', { cache: 'no-store' });
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+        const data = await res.json();
+        if (Array.isArray(data)) {
+            articles = data;
+        } else {
+            console.warn('articles.json は配列ではありません');
+            articles = [];
+        }
+    } catch (e) {
+        console.error('記事データの読み込みに失敗', e);
+        articles = [];
+    }
+}
 
-const articlesPerPage = 4; // 1ページあたりの記事数(記事増えたら変える予定)
+// (CONFIG に集約済み)
+// popularOrder / popularCount / articlesPerPage は CONFIG から参照
+
+const { popularOrder, popularCount } = CONFIG; // 既存コード互換のため (buildSidebarLists 内など)
+
 let currentPage = 1;
 let currentFilter = ""; // 検索語
 let currentCategory = ""; // カテゴリフィルタ
@@ -100,7 +59,7 @@ function updateQueryParams() {
 
 function setPageFromHash() {
     const hash = location.hash.match(/page=(\d+)/);
-    currentPage = hash ? Math.max(1, Math.min(Number(hash[1]), Math.ceil(articles.length / articlesPerPage))) : 1;
+    currentPage = hash ? Math.max(1, Math.min(Number(hash[1]), Math.ceil(articles.length / CONFIG.articlesPerPage))) : 1;
 }
 
 function updateHash(page) {
@@ -127,12 +86,12 @@ function renderArticles() {
     if (!blogSection) return; // 記事個別ページではスキップ
     setPageFromHash();
     const filtered = getFilteredArticles();
-    const totalPages = Math.ceil(filtered.length / articlesPerPage) || 1;
+    const totalPages = Math.ceil(filtered.length / CONFIG.articlesPerPage) || 1;
 
     // ページが範囲外になったら戻す
     if (currentPage > totalPages) currentPage = totalPages;
-    const start = (currentPage - 1) * articlesPerPage;
-    const end = start + articlesPerPage;
+    const start = (currentPage - 1) * CONFIG.articlesPerPage;
+    const end = start + CONFIG.articlesPerPage;
     const visibleArticles = filtered.slice(start, end);
 
     let articlesHTML = '<h2>ブログ記事一覧</h2>';
@@ -230,8 +189,9 @@ function initSearch() {
 }
 
 window.addEventListener('hashchange', renderArticles);
-window.onload = () => {
+window.onload = async () => {
     readQueryParams();
+    await loadArticles();
     initSearch();
     if (document.getElementById('blog')) {
         renderArticles();
@@ -247,7 +207,6 @@ window.onload = () => {
         if (!ul) return;
         if (ul.scrollWidth <= ul.clientWidth + 4) return; // 溢れていない
         if (sessionStorage.getItem('navHintDismissed')) return;
-        // 既存ヒント存在チェック
         if (headerNav.querySelector('.nav-scroll-hint')) return;
         const hint = document.createElement('span');
         hint.className = 'nav-scroll-hint';
@@ -263,7 +222,7 @@ window.onload = () => {
         const onScroll = () => { if (ul.scrollLeft > 8) dismiss(); };
         ul.addEventListener('scroll', onScroll, { passive:true });
         window.addEventListener('touchstart', onScroll, { passive:true });
-        setTimeout(dismiss, 5500);
+    setTimeout(dismiss, CONFIG.navScrollHintTimeout);
     })();
 };
 
