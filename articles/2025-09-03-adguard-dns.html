@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>アプリ内広告を消す方法 | AdGuard DNS設定（iPhone/Windows/DoH解説）</title>
+    <meta name="description" content="AdGuard DNSでアプリ内/ゲーム/サイト広告をまとめてブロックする具体的手順。iPhone構成プロファイル導入、Windowsの注意点、DNSとDoH(HTTPS)の基礎も初心者向けに整理。">
+    <meta name="keywords" content="AdGuard DNS,広告ブロック,アプリ内広告,ゲーム広告削除,iPhone DNS設定,構成プロファイル,Windows DNS問題,DoH,DNS over HTTPS,DNSとは,プライバシー保護,セキュリティ">
+    <link rel="stylesheet" href="../css/style.css">
+    <!-- OGPタグ -->
+    <meta property="og:title" content="アプリ内広告を消す方法 | AdGuard DNS設定（iPhone/Windows/DoH解説）">
+    <meta property="og:description" content="AdGuard DNSでアプリ/サイト広告をブロック。iPhone構成プロファイル手順とWindowsの注意点、DNSとDoHの基礎も解説。">
+    <meta property="og:image" content="https://ultimorse.github.io/img/ogp.png">
+    <meta property="og:url" content="https://ultimorse.github.io/articles/2025-09-03-adguard-dns.html">
+    <meta property="og:type" content="article">
+    <!-- Twitterカード用タグ -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="アプリ内広告を消す方法 | AdGuard DNS設定（iPhone/Windows/DoH解説）">
+    <meta name="twitter:description" content="AdGuard DNSでアプリ/サイト広告をブロック。iPhone構成プロファイル手順とWindowsの注意点、DNSとDoHの基礎も解説。">
+    <meta name="twitter:image" content="https://ultimorse.github.io/img/ogp.png">
+    <!-- Apple Touch Icons & Favicon -->
+    <link rel="apple-touch-icon" href="/img/apple-touch-icon.jpg">
+    <link rel="icon" href="/img/favicon.ico" type="image/x-icon">
+</head>
+
+<body>
+    <header>
+        <h1><a href="../index.html" style="text-decoration:none; color:inherit;">UltiMorseのブログ</a></h1>
+        <nav>
+            <ul>
+                <li><a href="https://github.com/UltiMorse" target="_blank" rel="noopener">GitHub</a></li>
+                <li><a href="https://atcoder.jp/users/UltiMorse" target="_blank" rel="noopener">AtCoder</a></li>
+                <li><a href="https://x.com/UltiMorse" target="_blank" rel="noopener">X（旧Twitter）</a></li>
+                <li><a href="https://www.youtube.com/@UltiMorse" target="_blank" rel="noopener">YouTube</a></li>
+            </ul>
+        </nav>
+    </header>
+    <nav aria-label="パンくずリスト" class="breadcrumb">
+        <ol>
+            <li><a href="../index.html">ホーム</a></li>
+            <li>アプリ内広告などあらゆる広告を消す方法</li>
+        </ol>
+    </nav>
+    <main class="layout-two-column">
+        <div class="primary-area">
+            <div class="support-banner" role="complementary" aria-label="サイト支援リンク">
+                <a class="support-banner__link" href="https://amzn.to/4gnzhJL" target="_blank" rel="noopener"
+                    aria-label="Amazonアソシエイト支援リンク (新しいタブ)">
+                    <span class="support-banner__icon" aria-hidden="true">🛒</span>
+                    <span class="support-banner__text">Amazon購入でこのブログを応援</span>
+                </a>
+            </div>
+            <article>
+                <header>
+                    <h2>アプリ内広告などあらゆる広告を消す方法</h2>
+                    <span class="article-date"><small>2025年09月03日</small></span>
+                </header>
+
+                <section>
+                    <h3>結論</h3>
+                    <p>
+                        AdGuard DNSを使うことで、アプリ内広告を含むあらゆる広告をブロックできます。アプリをおすすめされますが、課金を求められるので、<em>「【方法②】AdGuard DNS
+                            を手動で設定する」</em>の方がいいと思います。（リンクは下）
+                        各端末のタブを選択し、手順に従って設定してください。
+                    </p>
+                    <p>
+
+                    </p>
+                    <h3>iPhoneの場合は構成プロファイルでも設定可能（切り替えが簡単でおすすめ）</h3>
+                    <p>基本はWi‑FiのDNSを変更するだけですが、iPhoneは構成プロファイルをインストールする方法もあります。iOSのバージョンで表示名称は多少異なる場合がありますが、例として「一般 → VPNとデバイス管理 → 制限とプロキシ」などから DNS を <code>dns.adguard.com</code> (DoH) に変更します。DoHは DNS over HTTPS の略で、DNSリクエスト（どのドメイン名を引いたか）が暗号化され第三者から盗聴されにくくなります。</p>
+                    <p>
+                        ここからアクセス: <a href="https://adguard-dns.io/ja/public-dns.html" target="_blank"
+                            rel="noopener">https://adguard-dns.io/ja/public-dns.html</a>
+                    </p>
+                    <h3>アプリ内広告も制限されるので広告を再生したいときは切り替えは必要</h3>
+                    <p>課金で広告が消えます。みたいなアプリの広告を問答無用で削除できますが、ゲーム内報酬のために広告を再生したいときは切り替えが必要です。また、広告収入で成立するアプリもあるため、注意が必要です。必要に応じて一時的に無効化/有効化を切り替える運用を推奨します。</p>
+
+                    <h3>WindowsではDNS設定が自動に戻らなくなる問題があるので、DNS手動設定はおすすめしません</h3>
+                    <p>一部環境で、WindowsでDNS設定が自動に戻らなくなる現象を経験したため、DNSを手動で固定する運用はあまりおすすめしません。DNSが固定になってしまうと学内や会社などの認証付きWi‑Fiで問題が起きる場合があります。筆者は過去にレジストリ変更等でも戻せず初期化したことがあるので注意してください（ネットワークのリセットやアダプタ再設定で解消できるケースもあります）。</p>
+                    
+
+
+                    <h3>そもそもDNSとは？</h3>
+                    <p>DNSとはDomain Name Systemの略で、インターネット上のドメイン名(人間が覚えやすい)とIPアドレス（人間が覚えにくい）を対応付ける仕組みです。これにより、ユーザーは覚えやすいドメイン名を使ってウェブサイトにアクセスできるようになります。</p>
+                    <h3>セキュリティ上の懸念</h3>
+                    <p>
+                        DNSを変更することで、アクセスするドメイン名の問い合わせ履歴が利用するDNS事業者に集約されるリスクがあります。内容そのもの(HTTPS本文)が見られるわけではありませんが、信頼できる事業者を選び自己責任で利用してください。
+                    </p>
+                    <p>
+                        DNSサーバはCloudflare（1.1.1.1）Googleパブリック DNS（8.8.8.8）Quad9（9.9.9.9）などは有名で、ゲームの通信を改善したいと思って設定してみたことのあるキッズ（私のこと）も多いのではないでしょうか。AdGuard DNSも同様に信頼できるサービスです。なぜなら、AdGuard DNSはOSSなので、ソースコードが公開されており、誰でもその中身を確認できるからです。ただし、全部公開されているわけではないので最終的には個人の判断になります。<br>
+                    </p>
+
+                    <h3>まとめ</h3>
+
+                    <p>AdGuard DNSを使うことで、アプリ内広告を含むあらゆる広告をブロックできます。特にiPhoneでは構成プロファイルを使った設定が簡単でおすすめです。ただし、広告を再生したいときは切り替えが必要です。WindowsではDNS設定が自動に戻らなくなる問題があるため、手動設定は避けた方が良いでしょう。セキュリティ面でもAdGuard DNSは信頼できるサービスだと思います。</p>
+                    <p>関連記事：<a href="2025-08-10-google-search-console.html">Google Search ConsoleでURLごとにインデックス申請する方法</a></p>
+                </section>
+                <nav style="margin-top:2em;">
+                    <a href="../index.html" class="home-btn">← ブログ一覧へ戻る</a>
+                </nav>
+            </article>
+        </div>
+        <aside class="sidebar" aria-label="サイト補助情報">
+            <section class="profile-card" aria-labelledby="profile-heading">
+                <h2 id="profile-heading">管理人プロフィール</h2>
+                <img src="/img/apple-touch-icon.jpg" alt="サイト管理人アイコン" class="profile-avatar" loading="lazy">
+                <p class="profile-name">UltiMorse</p>
+                <p class="profile-text">大学生です。プログラミング / 競プロ / ガジェットなどについて気ままに書いています。</p>
+                <ul class="profile-links">
+                    <li><a href="https://github.com/UltiMorse" target="_blank" rel="noopener">GitHub</a></li>
+                    <li><a href="https://atcoder.jp/users/UltiMorse" target="_blank" rel="noopener">AtCoder</a></li>
+                    <li><a href="https://x.com/UltiMorse" target="_blank" rel="noopener">X</a></li>
+                    <li><a href="https://www.youtube.com/@UltiMorse" target="_blank" rel="noopener">YouTube</a></li>
+                </ul>
+            </section>
+            <section class="site-search" aria-labelledby="search-heading">
+                <h2 id="search-heading">サイト内検索</h2>
+                <form id="search-form" role="search" aria-label="記事検索" onsubmit="return false;">
+                    <label for="site-search" class="visually-hidden">検索ワード</label>
+                    <input type="search" id="site-search" placeholder="キーワード検索" autocomplete="off">
+                    <button type="button" id="clear-search" aria-label="検索をクリア" title="検索をクリア">×</button>
+                </form>
+                <p class="search-result-info" id="search-result-info" aria-live="polite"></p>
+            </section>
+            <section class="categories-card" aria-label="カテゴリー">
+                <h2>カテゴリー</h2>
+                <ul class="category-list"></ul>
+                <button type="button" class="clear-category-btn" aria-label="カテゴリー解除">全て表示</button>
+            </section>
+            <section class="popular-card" aria-label="人気記事">
+                <h2>人気記事</h2>
+                <ul class="popular-list"></ul>
+            </section>
+            <section class="recommended-card" aria-label="おすすめ記事">
+                <h2>おすすめ記事</h2>
+                <ul class="recommended-list"></ul>
+            </section>
+        </aside>
+    </main>
+    <footer>
+        <p>
+            Amazon のアソシエイトとして、UltiMorseは適格販売により収入を得ています。
+        </p>
+        <p>&copy; 2025 UltiMorse</p>
+    </footer>
+    <div class="mobile-bottom-nav" aria-label="モバイルナビゲーション">
+        <button type="button" class="mb-nav-btn" data-action="menu" aria-label="メニュー">
+            <span class="icon" aria-hidden="true">☰</span><span class="label">メニュー</span>
+        </button>
+        <button type="button" class="mb-nav-btn" data-action="home" aria-label="ホーム">
+            <span class="icon" aria-hidden="true">🏠</span><span class="label">ホーム</span>
+        </button>
+        <button type="button" class="mb-nav-btn" data-action="search" aria-label="検索">
+            <span class="icon" aria-hidden="true">🔍</span><span class="label">検索</span>
+        </button>
+        <button type="button" class="mb-nav-btn" data-action="top" aria-label="トップへ">
+            <span class="icon" aria-hidden="true">⬆</span><span class="label">トップ</span>
+        </button>
+        <button type="button" class="mb-nav-btn" data-action="sidebar" aria-label="サイドバー表示切替">
+            <span class="icon" aria-hidden="true">≡</span><span class="label">サイドバー</span>
+        </button>
+    </div>
+    <script src="../js/main.js" defer></script>
+</body>
+
+</html>
