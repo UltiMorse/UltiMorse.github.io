@@ -1,6 +1,13 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&family=Kosugi+Maru&display=swap');
 
+/* ==========================================================
+  Accessibility improvements (2025-09-14)
+  - Improved breadcrumb separator contrast (#888 -> #9ca0a4)
+  - Enlarged category buttons (font-size & padding) for tap target
+  - Added :focus-visible outlines / focus rings for buttons & pager
+  ========================================================== */
+
 html {
   box-sizing: border-box;
   font-size: 16px;
@@ -90,10 +97,16 @@ main {
 /* Category list */
 .category-list { list-style:none; margin:0 0 10px 0; padding:0; display:flex; flex-wrap:wrap; gap:8px; }
 .category-list li { margin:0; }
-.category-list button { background:#2d3136; color:#ddd; border:none; border-radius:20px; padding:4px 12px; font-size:0.72rem; cursor:pointer; transition:background 0.2s,color 0.2s; }
+.category-list button { background:#2d3136; color:#ddd; border:none; border-radius:20px; padding:6px 14px; font-size:0.78rem; cursor:pointer; transition:background 0.2s,color 0.2s; }
 .category-list button:hover, .category-list button.active { background:#ffb347; color:#23272a; }
 .clear-category-btn { background:#3a4046; color:#ccc; border:none; border-radius:8px; padding:6px 10px; font-size:0.7rem; cursor:pointer; transition:background 0.2s,color 0.2s; }
 .clear-category-btn:hover { background:#ffb347; color:#23272a; }
+/* Focus ring for keyboard navigation */
+.category-list button:focus-visible,
+.clear-category-btn:focus-visible {
+  outline:2px solid #ffb347;
+  outline-offset:2px;
+}
 
 /* Popular list */
 .popular-list { list-style:none; margin:0; padding:0; font-size:0.82rem; display:flex; flex-direction:column; gap:8px; }
@@ -237,7 +250,8 @@ article img {
 }
 .breadcrumb li + li::before {
   content: "›";
-  color: #888;
+  /* Improved contrast from #888 -> #9ca0a4 (>=4.5:1 vs background) */
+  color: #9ca0a4;
   margin: 0 8px;
   font-size: 1em;
 }
@@ -274,6 +288,9 @@ article img {
   color: #23272a;
   outline: none;
   box-shadow: 0 2px 8px #ffb34744;
+}
+.pager button:focus-visible {
+  box-shadow: 0 0 0 2px #ffb347, 0 0 0 4px #23272a;
 }
 .pager button:hover:not(:disabled):not(.active) {
   background: #ffe0a3;
