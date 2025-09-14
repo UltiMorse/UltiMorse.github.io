@@ -5,6 +5,11 @@ html {
   box-sizing: border-box;
   font-size: 16px;
 }
+/* 文章サイズ調整用のCSS変数（必要に応じてここを微調整） */
+:root {
+  --font-article-text: 1.0em;      /* 既存 1.08em -> やや小さく */
+  --font-article-heading: 1.18em;  /* 既存 1.25em -> 少しだけ縮小 */
+}
 *, *:before, *:after {
   box-sizing: inherit;
 }
@@ -161,7 +166,7 @@ article:hover {
 article h3 {
   color: #4fc3f7;
   margin: 0 0 0.2em 0;
-  font-size: 1.25em;
+  font-size: var(--font-article-heading);
   font-family: 'Kosugi Maru', 'Noto Sans JP', sans-serif;
   display: inline-block;
   vertical-align: middle;
@@ -181,7 +186,7 @@ article h3 + .article-date {
 
 article p {
   margin: 0.7em 0 1.2em 0;
-  font-size: 1.08em;
+  font-size: var(--font-article-text);
 }
 
 article a {
