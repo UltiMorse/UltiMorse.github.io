@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ASUS Nexus 7（2012）TWRPでストレージ削除→APXモードから復活した話</title>
+    <meta name="description"
+        content="Nexus 7 (2012)がTWRPでストレージ消失・文鎮化した際、APXモードとnvflashで復旧した体験談。APX認識・ペイロード送信・bootloader書き込み・--syncの重要性などを解説。">
+    <meta name="keywords" content="Nexus7,文鎮化,APXモード,nvflash,TWRP,Android復旧,ストレージ消失,fastboot,tegra30_debrick,LineageOS">
+    <link rel="stylesheet" href="../css/style.css">
+    <!-- OGPタグ -->
+    <meta property="og:title" content="ASUS Nexus 7（2012）TWRPでストレージ消失→APXモードから復活した話">
+    <meta property="og:description"
+        content="Nexus 7 (2012)がTWRPでストレージ消失・文鎮化した際、APXモードとnvflashで復旧した体験談。APX認識・ペイロード送信・bootloader書き込み・--syncの重要性などを解説。">
+    <meta property="og:image" content="https://ultimorse.github.io/img/ogp.png">
+    <meta property="og:url" content="https://ultimorse.github.io/articles/2025-10-10-nexus7.html">
+    <meta property="og:type" content="article">
+    <!-- Twitterカード用タグ -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="ASUS Nexus 7（2012）TWRPでストレージ消失→APXモードから復活した話">
+    <meta name="twitter:description"
+        content="Nexus 7 (2012)がTWRPでストレージ消失・文鎮化した際、APXモードとnvflashで復旧した体験談。APX認識・ペイロード送信・bootloader書き込み・--syncの重要性などを解説。">
+    <meta name="twitter:image" content="https://ultimorse.github.io/img/ogp.png">
+    <!-- Apple Touch Icons & Favicon -->
+    <link rel="apple-touch-icon" href="/img/apple-touch-icon.jpg">
+    <link rel="icon" href="/img/favicon.ico" type="image/x-icon">
+</head>
+
+<body>
+    <header>
+        <h1><a href="../index.html" style="text-decoration:none; color:inherit;">UltiMorseのブログ</a></h1>
+        <nav>
+            <ul>
+                <li><a href="https://github.com/UltiMorse" target="_blank" rel="noopener">GitHub</a></li>
+                <li><a href="https://atcoder.jp/users/UltiMorse" target="_blank" rel="noopener">AtCoder</a></li>
+                <li><a href="https://x.com/UltiMorse" target="_blank" rel="noopener">X（旧Twitter）</a></li>
+                <li><a href="https://www.youtube.com/@UltiMorse" target="_blank" rel="noopener">YouTube</a></li>
+            </ul>
+        </nav>
+    </header>
+    <nav aria-label="パンくずリスト" class="breadcrumb">
+        <ol>
+            <li><a href="../index.html">ホーム</a></li>
+            <li>ASUS Nexus 7（2012）TWRPでストレージ削除→APXモードから復活した話</li>
+        </ol>
+    </nav>
+    <main class="layout-two-column">
+        <div class="primary-area">
+            <div class="support-banner" role="complementary" aria-label="サイト支援リンク">
+                <a class="support-banner__link" href="https://amzn.to/4gnzhJL" target="_blank" rel="noopener"
+                    aria-label="Amazonアソシエイト支援リンク (新しいタブ)">
+                    <span class="support-banner__icon" aria-hidden="true">🛒</span>
+                    <span class="support-banner__text">Amazon購入でこのブログを応援</span>
+                </a>
+            </div>
+            <article>
+                <header>
+                    <h2>ASUS Nexus 7（2012）TWRPでストレージ削除→APXモードから復活した話</h2>
+                    <span class="article-date"><small>2025年10月10日</small></span>
+                </header>
+
+                <section>
+                    <section class="article-summary">
+                        <h3>すべての†始まり†</h3>
+                        <p>ADBとかTWRPを使ってROM焼きと言うやつをやりたい。と思った子どもの頃の筆者が、お家にあったNexus7
+                            wifi(2012)によくばって重めのOSを入れようとしフリーズ。TWRPでヤケクソのストレージ削除をしたという......（シンジラレナイ）ブートローダーってROMに入ってんねや（フット後藤）当然、画面は真っ黒でfastbootにも入れないし、Windowsだと認識も微妙。Ubuntuに慣れてきたので、この機会に復活させようじゃないかと。
+                        </p>
+                    </section>
+
+
+                    <h3>前提・状態</h3>
+                    <ul>
+                        <li>端末：Nexus 7 (2012 wifi)</li>
+                        <li>PC環境：Ubuntu 22.04</li>
+                        <li>eMMCは無事</li>
+                        <li><code>lsusb</code> で <code>ID 0955:7330 NVIDIA Corp. APX</code> が見えた → APXモードで認識</li>
+                        <li>fastbootに入れない</li>
+                    </ul>
+
+                    <h3>なぜLinuxなのか</h3>
+                    <p>Windowsだとドライバの署名の強制を解除してもドライバのインストールが許されなかった。署名がない古くてよくわからんドライバはWindows君はお嫌いなようで。</p>
+
+                    <p>
+                        復旧にあたって、<a href="https://github.com/tofurky/tegra30_debrick" target="_blank"
+                            rel="noopener">tofurky/tegra30_debrick</a> のREADMEやIssue（#9,
+                        #16など）を参考にしました。（<s>この記事見るよりわかりやすい可能性</s>）<br>
+                    </p>
+
+                    <h3>手順</h3>
+<ul>
+    <li><b>python3-usbパッケージについて：</b> Ubuntu 22.04では<code>python3-usb</code>でOKですが、環境によっては<code>pip install pyusb</code>も必要になる場合があります。エラーが出る場合は<code>pip install pyusb</code>も実行してください。</li>
+    <li><b>fusee-launcherの実行パス：</b> <code>cd fusee-launcher</code>してから<code>sudo python3 fusee-launcher.py payload/uart_payload_n7.bin</code>のように実行するのが確実です。パス指定が曖昧だと失敗する場合があります。</li>
+    <li><b>fastboot起動について：</b> BCTとEBTが正しく書き込まれると、Googleロゴ後に自動的にOS（ROM）が立ち上がる場合があります。必ずしもfastbootで再起動しなくてもよい場合があるので、挙動を確認してください。</li>
+</ul>
+                    <h3>実践手順（2025年現在）</h3>
+                    <ol>
+                        <li><b>必須ツールのインストール</b><br>
+                            <code>sudo apt update<br>
+        sudo apt install git adb fastboot python3 python3-pip python3-usb build-essential libusb-1.0-0-dev</code>
+                        </li>
+                        <li><b>32bitライブラリ問題の解決</b><br>
+                            <code>sudo dpkg --add-architecture i386<br>
+        sudo apt update<br>
+        sudo apt install libc6:i386 libstdc++6:i386</code><br>
+                            nvflashは32bitなので64bit環境ではこれが必須。
+                        </li>
+                        <li><b>tegra30_debrickの準備</b><br>
+                            <code>cd ~<br>
+        git clone --recursive https://github.com/tofurky/tegra30_debrick.git</code>
+                        </li>
+                        <li><b>Pythonライブラリのインストール</b><br>
+                            <code>cd ~/tegra30_debrick/fusee-launcher<br>
+        pip install -r requirements.txt</code>
+                        </li>
+                        <li><b>Nexus 7をAPXモードで接続</b><br>
+                            音量上と電源を押しながらUSB接続。<br>
+                            <code>lsusb | grep -i nvidia</code> で <code>0955:7330</code>
+                            が見えればOK。うまくいかなければ、分解してバッテリーのコネクタを抜き差ししてリセット（私の場合これがポイントだった。）。
+                        </li>
+                        <li><b>USBタイムアウト対策(TLP使用者のみ)</b><br>
+                            <code>sudo systemctl stop tlp<br>
+        echo -1 | sudo tee /sys/module/usbcore/parameters/autosuspend</code>
+                        </li>
+                        <li><b>ペイロード送信</b><br>
+                            <code>cd ~/tegra30_debrick<br>
+        sudo python3 ./fusee-launcher/fusee-launcher.py ./payload/uart_payload_n7.bin</code>
+                        </li>
+                        <li><b>BCTとブートローダー書き込み</b><br>
+                            <code>sudo ./utils/nvflash_v1.13.87205_miniloader_patched \<br>
+            --setbct --bct ./bct/nexus_7_grouper_bct.bin \<br>
+            --configfile ./utils/flash.cfg \<br>
+            --bl ./bootloader/bootloader-grouper-4.23.img --go</code>
+                        </li>
+                        <li><b>EBTへの書き込みとBCTの同期</b><br>
+                            <code>sudo ./utils/nvflash_v1.13.87205_miniloader_patched \<br>
+            --resume \<br>
+            --download EBT bootloader/bootloader-grouper-4.23.img \<br>
+            --configfile ./utils/flash.cfg \<br>
+            --sync</code><br>
+                            <b>※--syncがなかったので手間取った。</b>
+                        </li>
+                        <li><b>Fastbootモード起動</b><br>
+                            Googleロゴで止まったら電源長押しでオフ→音量ダウン＋電源長押しでFastboot画面へ。（私の場合、Googleロゴで待機していたら元のOSが起動した。）
+                        </li>
+                        <li><b>Fastboot認識確認</b><br>
+                            <code>sudo fastboot devices</code> でシリアル番号が出ればおけ
+                        </li>
+                    </ol>
+
+                    <p>
+                        ここで Googleロゴが表示 → 元から入っていたLineageOSが起動
+                    </p>
+
+                    <h3>ポイント</h3>
+                    <ul>
+                        <li><code>--sync</code> によって eMMC 書き込みキャッシュが確実に反映された</li>
+                        <li>bricksafe.img や GPT の再書き込みは不要だった（eMMC自体は生きていた）</li>
+                        <li>READMEでは明示されていなかったが、Issueで補足されていた手順が決定打</li>
+                    </ul>
+
+                    <h3>気づき</h3>
+                    <ul>
+                        <li>TWRPで「フォーマットデータ」するとパーティションテーブルまで壊れることがある</li>
+                        <li>クソめんどくさいので二度とやらない。当たり前。</li>
+                        <li>詰まったらGitHubのIssue欄を読め。</li>
+                    </ul>
+
+                    <h3>まとめ</h3>
+                    <div class="article-summary">
+                        TWRPでストレージを消して文鎮化したNexus 7。<br>
+                        APXモードから、Linuxとtegra30_debrick、そしてGitHubの海外ニキたちの力で生き返った。<br>
+                        <ul>
+                            <li>公式README通りでは復旧できず、Googleロゴフリーズやfastboot認識不可に手間取る。</li>
+                            <li>Issueで「--sync」やコマンド順序のミスに気づく。</li>
+                            <li>物理故障ではなくパーティション破損が原因。eMMC自体は無事（それはそう）</li>
+                            <li>GitHubはすごい（小並感）</li>
+                        </ul>
+                    </div>
+                    この記事が同じ境遇の方の助けになれば幸いです。お読みいただきありがとうございました。なお、記事の内容によって生じた損害に関して一切責任を負いません（断定）
+                    <p>関連記事：<a href="2025-09-03-adguard-dns.html">アプリ内広告などあらゆる広告を消す方法（AdGuard DNS）</a></p>
+                </section>
+                <nav style="margin-top:2em;">
+                    <a href="../index.html" class="home-btn">← ブログ一覧へ戻る</a>
+                </nav>
+            </article>
+        </div>
+        <aside class="sidebar" aria-label="サイト補助情報">
+            <section class="profile-card" aria-labelledby="profile-heading">
+                <h2 id="profile-heading">管理人プロフィール</h2>
+                <img src="/img/apple-touch-icon.jpg" alt="サイト管理人アイコン" class="profile-avatar" loading="lazy">
+                <p class="profile-name">UltiMorse</p>
+                <p class="profile-text">大学生です。プログラミング / 競プロ / ガジェットなどについて気ままに書いています。</p>
+                <ul class="profile-links">
+                    <li><a href="https://github.com/UltiMorse" target="_blank" rel="noopener">GitHub</a></li>
+                    <li><a href="https://atcoder.jp/users/UltiMorse" target="_blank" rel="noopener">AtCoder</a></li>
+                    <li><a href="https://x.com/UltiMorse" target="_blank" rel="noopener">X</a></li>
+                    <li><a href="https://www.youtube.com/@UltiMorse" target="_blank" rel="noopener">YouTube</a></li>
+                </ul>
+            </section>
+            <section class="site-search" aria-labelledby="search-heading">
+                <h2 id="search-heading">サイト内検索</h2>
+                <form id="search-form" role="search" aria-label="記事検索" onsubmit="return false;">
+                    <label for="site-search" class="visually-hidden">検索ワード</label>
+                    <input type="search" id="site-search" placeholder="キーワード検索" autocomplete="off">
+                    <button type="button" id="clear-search" aria-label="検索をクリア" title="検索をクリア">×</button>
+                </form>
+                <p class="search-result-info" id="search-result-info" aria-live="polite"></p>
+            </section>
+            <section class="categories-card" aria-label="カテゴリー">
+                <h2>カテゴリー</h2>
+                <ul class="category-list"></ul>
+                <button type="button" class="clear-category-btn" aria-label="カテゴリー解除">全て表示</button>
+            </section>
+            <section class="popular-card" aria-label="人気記事">
+                <h2>人気記事</h2>
+                <ul class="popular-list"></ul>
+            </section>
+            <section class="recommended-card" aria-label="おすすめ記事">
+                <h2>おすすめ記事</h2>
+                <ul class="recommended-list"></ul>
+            </section>
+        </aside>
+    </main>
+    <footer>
+        <p>
+            Amazon のアソシエイトとして、UltiMorseは適格販売により収入を得ています。
+        </p>
+        <p>&copy; 2025 UltiMorse</p>
+    </footer>
+    <div class="mobile-bottom-nav" aria-label="モバイルナビゲーション">
+        <button type="button" class="mb-nav-btn" data-action="menu" aria-label="メニュー">
+            <span class="icon" aria-hidden="true">☰</span><span class="label">メニュー</span>
+        </button>
+        <button type="button" class="mb-nav-btn" data-action="home" aria-label="ホーム">
+            <span class="icon" aria-hidden="true">🏠</span><span class="label">ホーム</span>
+        </button>
+        <button type="button" class="mb-nav-btn" data-action="search" aria-label="検索">
+            <span class="icon" aria-hidden="true">🔍</span><span class="label">検索</span>
+        </button>
+        <button type="button" class="mb-nav-btn" data-action="top" aria-label="トップへ">
+            <span class="icon" aria-hidden="true">⬆</span><span class="label">トップ</span>
+        </button>
+        <button type="button" class="mb-nav-btn" data-action="sidebar" aria-label="サイドバー表示切替">
+            <span class="icon" aria-hidden="true">≡</span><span class="label">サイドバー</span>
+        </button>
+    </div>
+    <script src="../js/main.js" defer></script>
+</body>
+
+</html>

@@ -1,4 +1,13 @@
-[
+[ 
+  {
+    "title": "Nexus 7 (2012) 文鎮化からの復活",
+    "summary": "TWRPでストレージを消して文鎮化したNexus 7をtegra30_debrickで復活させた話",
+    "url": "articles/2025-10-10-nexus7.html",
+    "date": "2025-10-10",
+    "category": "Android",
+    "views": 160,
+    "recommended": true
+  },
   {
     "title": "アプリ内広告などあらゆる広告を消す方法",
     "summary": "AdGuard DNSを使ってあらゆる広告をブロックする手順を解説",
@@ -59,7 +68,7 @@
     "url": "articles/2025-04-20-ps4-ssd.html",
     "date": "2025-04-20",
     "category": "PS4",
-    "views": 160,
+    "views": 150,
     "recommended": true
   },
   {
