@@ -86,8 +86,8 @@
                             rel="noopener">tofurky/tegra30_debrick</a> のREADMEやIssue（#9,
                         #16など）を参考にしました。（<s>この記事見るよりわかりやすい可能性</s>）<br>
                     </p>
-
-                    <h3>手順</h3>
+                    <hr>
+                    <h3>注意点</h3>
 <ul>
     <li><b>python3-usbパッケージについて：</b> Ubuntu 22.04では<code>python3-usb</code>でOKですが、環境によっては<code>pip install pyusb</code>も必要になる場合があります。エラーが出る場合は<code>pip install pyusb</code>も実行してください。</li>
     <li><b>fusee-launcherの実行パス：</b> <code>cd fusee-launcher</code>してから<code>sudo python3 fusee-launcher.py payload/uart_payload_n7.bin</code>のように実行するのが確実です。パス指定が曖昧だと失敗する場合があります。</li>
