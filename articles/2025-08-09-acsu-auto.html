@@ -49,74 +49,80 @@
     <main class="layout-two-column">
         <div class="primary-area">
             <div class="support-banner" role="complementary" aria-label="サイト支援リンク">
-                <a class="support-banner__link" href="https://amzn.to/4gnzhJL" target="_blank" rel="noopener" aria-label="Amazonアソシエイト支援リンク (新しいタブ)">
+                <a class="support-banner__link" href="https://amzn.to/4gnzhJL" target="_blank" rel="noopener"
+                    aria-label="Amazonアソシエイト支援リンク (新しいタブ)">
                     <span class="support-banner__icon" aria-hidden="true">🛒</span>
                     <span class="support-banner__text">Amazon購入でこのブログを応援</span>
                 </a>
             </div>
             <article>
-            <header>
-                <h2>信州大学ACSU多要素認証の自動化</h2>
-                <span class="article-date"><small>2025年8月09日</small></span>
-            </header>
+                <header>
+                    <h2>信州大学ACSU多要素認証の自動化</h2>
+                    <span class="article-date"><small>2025年8月09日</small></span>
+                </header>
 
-            <section>
-                <h3>概要</h3>
-                <p>
-                    多要素認証がめんどくさかったので、信州大学ACSUの多要素認証「WisePoint」のイメージ認証を自動化するTampermonkeyユーザースクリプト「wisepoint-auto」を作成しました。<br>
-                    GitHubリポジトリ：<a href="https://github.com/UltiMorse/wisepoint-auto" target="_blank"
-                        rel="noopener">UltiMorse/wisepoint-auto</a>
-                </p>
-                <blockquote>
-                    <b>注意:</b><br>
-                    本スクリプトは検証目的であり、実運用や利用は推奨しません。<br>
-                    セキュリティ上のリスクや規約違反となる可能性があるため、自己責任でご利用ください。
-                </blockquote>
-                <figure>
-                    <img src="../images/images-2025-08-09/wisepoint.png" alt="wisepointの画面">
-                    <figcaption>自動入力ボタンで一発ログイン</figcaption>
-                </figure>
-            </section>
-            <section>
-                <h3>WisePointイメージ認証の仕様</h3>
-                <ul>
-                    <li>5×5のマス（合計25マス）が画面上に表示される</li>
-                    <li>各マスは <code>&lt;div class="input_imgdiv_class" id="buttonN" ...&gt;</code>（N=0〜24）で表現</li>
-                    <li>画像は <code>style="background-image:url('/idp/tenant/0/images/imatrix/iXX.gif')"</code> で指定</li>
-                    <li>画像ファイル名とアルファベットの対応（Qは存在しない）<br>
-                        例：i1.gif=A, i2.gif=B, ... i16.gif=P, i17.gif=R, ... i25.gif=Z<br>
-                        ※Qは存在しない。
-                    </li>
-                    <li>配置は毎回ランダム。ファイル名からアルファベットを判定</li>
-                </ul>
-            </section>
-            <section>
-                <h3>自動化の流れ</h3>
-                <ol>
-                    <li>5×5マスの各divから background-image のファイル名を取得</li>
-                    <li>ファイル名からアルファベットを判定（Qはスキップ）</li>
-                    <li>ユーザーが設定した順番（例：A→B→C→D）で該当するマスをクリック</li>
-                    <li>4つ選択後、「ログイン」ボタン（input#btnLogin）をクリック</li>
-                </ol>
-            </section>
-            <section>
-                <h3>使い方</h3>
-                <ol>
-                    <li>Chrome拡張「<a
-                            href="https://chromewebstore.google.com/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo?pli=1"
-                            target="_blank" rel="noopener">Tampermonkey</a>」をインストール</li>
-                    <li>Chrome拡張の開発者モードをオンにし、ユーザースクリプトの実行を許可</li>
-                    <li><a href="https://github.com/UltiMorse/wisepoint-auto" target="_blank"
-                            rel="noopener">GitHubリポジトリ</a>からスクリプトを取得</li>
-                    <li>Tampermonkeyで新規スクリプトとして追加</li>
-                    <li>スクリプト内の <code>const PASSWORD = ["A","B","C","D"];</code> を自分の設定に編集</li>
-                    <li>WisePointイメージ認証画面で自動クリックが動作することを確認</li>
-                    <li>以上がわからなければ使用はおすすめしません。</li>
-                </ol>
-            </section>
-            <section>
-                <h3>スクリプト本体 8月11日変更ver.(アクセス権限とdescriptionの修正)</h3>
-                <pre style="background:#222;color:#ffffff;padding:1em;overflow:auto;font-size:90%"><code>// ==UserScript==
+                <section>
+                    <h3>概要</h3>
+                    <p>
+                        多要素認証がめんどくさかったので、信州大学ACSUの多要素認証「WisePoint」のイメージ認証を自動化するTampermonkeyユーザースクリプト「wisepoint-auto」を作成しました。<br>
+                        GitHubリポジトリ：<a href="https://github.com/UltiMorse/wisepoint-auto" target="_blank"
+                            rel="noopener">UltiMorse/wisepoint-auto</a>
+                    </p>
+                    <blockquote>
+                        <b>注意:</b><br>
+                        本スクリプトは検証目的であり、実運用や利用は推奨しません。<br>
+                        セキュリティ上のリスクや規約違反となる可能性があるため、自己責任でご利用ください。
+                    </blockquote>
+                    <figure>
+                        <img src="../images/images-2025-08-09/wisepoint.png" alt="wisepointの画面">
+                        <figcaption>自動入力ボタンで一発ログイン</figcaption>
+                    </figure>
+                </section>
+                <section>
+                    <h3>WisePointイメージ認証の仕様</h3>
+                    <ul>
+                        <li>5×5のマス（合計25マス）が画面上に表示される</li>
+                        <li>各マスは <code>&lt;div class="input_imgdiv_class" id="buttonN" ...&gt;</code>（N=0〜24）で表現</li>
+                        <li>画像は <code>style="background-image:url('/idp/tenant/0/images/imatrix/iXX.gif')"</code> で指定
+                        </li>
+                        <li>画像ファイル名とアルファベットの対応（Qは存在しない）<br>
+                            例：i1.gif=A, i2.gif=B, ... i16.gif=P, i17.gif=R, ... i25.gif=Z<br>
+                            ※Qは存在しない。
+                        </li>
+                        <li>配置は毎回ランダム。ファイル名からアルファベットを判定</li>
+                    </ul>
+                </section>
+                <section>
+                    <h3>自動化の流れ</h3>
+                    <ol>
+                        <li>5×5マスの各divから background-image のファイル名を取得</li>
+                        <li>ファイル名からアルファベットを判定（Qはスキップ）</li>
+                        <li>ユーザーが設定した順番（例：A→B→C→D）で該当するマスをクリック</li>
+                        <li>4つ選択後、「ログイン」ボタン（input#btnLogin）をクリック</li>
+                    </ol>
+                </section>
+                <section>
+                    <h3>使い方</h3>
+                    <ol>
+                        <li>Chrome拡張「<a
+                                href="https://chromewebstore.google.com/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo?pli=1"
+                                target="_blank" rel="noopener">Tampermonkey</a>」をインストール</li>
+                        <li>Chrome拡張の開発者モードをオンにし、ユーザースクリプトの実行を許可
+                            <img src="../images/images-2025-08-09/developer.png" alt="デベロッパーモードオン画面">
+                            この画像はBraveブラウザの例です。(Chromium系なのでChromeとほとんど同じはず。)拡張機能一覧で詳細を開くか、タスクバーのアイコンから開くかしてください。
+                        </li>
+                        <img src="../images/images-2025-08-09/user.png" alt="ユーザースクリプト許可画面"></li>
+                        <li><a href="https://github.com/UltiMorse/wisepoint-auto" target="_blank"
+                                rel="noopener">GitHubリポジトリ</a>からスクリプトを取得</li>
+                        <li>Tampermonkeyで新規スクリプトとして追加</li>
+                        <li>スクリプト内の <code>const PASSWORD = ["A","B","C","D"];</code> を自分の設定に編集</li>
+                        <li>WisePointイメージ認証画面で自動クリックが動作することを確認</li>
+                        <li>以上がわからなければ使用はおすすめしません。</li>
+                    </ol>
+                </section>
+                <section>
+                    <h3>スクリプト本体 8月11日変更ver.(アクセス権限とdescriptionの修正)</h3>
+                    <pre style="background:#222;color:#ffffff;padding:1em;overflow:auto;font-size:90%"><code>// ==UserScript==
 // @name         wisepoint-auto
 // @namespace    https://github.com/UltiMorse/wisepoint-auto
 // @version      2025-08-11
@@ -223,19 +229,19 @@
 
 })();
 </code></pre>
-            </section>
-            <section>
-                <h3>補足・注意事項</h3>
-                <ul>
-                    <li>WisePointの仕様変更等で動作しなくなる場合があります</li>
-                    <li>不正利用・規約違反等の責任は一切負いません</li>
-                    <li>ご指摘・ご意見はXやメールでお気軽にどうぞ</li>
-                </ul>
-                <p>関連記事：<a href="2025-08-10-google-search-console.html">Google Search ConsoleでURL毎にインデックス申請</a></p>
-            </section>
-            <nav style="margin-top:2em;">
-                <a href="../index.html" class="home-btn">← ブログ一覧へ戻る</a>
-            </nav>
+                </section>
+                <section>
+                    <h3>補足・注意事項</h3>
+                    <ul>
+                        <li>WisePointの仕様変更等で動作しなくなる場合があります</li>
+                        <li>不正利用・規約違反等の責任は一切負いません</li>
+                        <li>ご指摘・ご意見はXやメールでお気軽にどうぞ</li>
+                    </ul>
+                    <p>関連記事：<a href="2025-08-10-google-search-console.html">Google Search ConsoleでURL毎にインデックス申請</a></p>
+                </section>
+                <nav style="margin-top:2em;">
+                    <a href="../index.html" class="home-btn">← ブログ一覧へ戻る</a>
+                </nav>
             </article>
         </div>
         <aside class="sidebar" aria-label="サイト補助情報">
@@ -260,7 +266,7 @@
                 </form>
                 <p class="search-result-info" id="search-result-info" aria-live="polite"></p>
             </section>
-            <section class="categories-card" aria-label="カテゴリー" >
+            <section class="categories-card" aria-label="カテゴリー">
                 <h2>カテゴリー</h2>
                 <ul class="category-list"></ul>
                 <button type="button" class="clear-category-btn" aria-label="カテゴリー解除">全て表示</button>
