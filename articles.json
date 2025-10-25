@@ -1,5 +1,14 @@
 [ 
   {
+    "title": "ドア銃のシグナルバイクが抜けないときの対処法",
+    "summary": "シグナルバイクがドア銃から抜けなくなったときの分解手順を解説",
+    "url": "articles/2025-10-25-doorgun.html",
+    "date": "2025-10-25",
+    "category": "ホビー",
+    "views": 50,
+    "recommended": true
+  },
+  {
     "title": "Nexus 7 (2012) 文鎮化からの復活",
     "summary": "TWRPでストレージを消して文鎮化したNexus 7をtegra30_debrickで復活させた話",
     "url": "articles/2025-10-10-nexus7.html",
